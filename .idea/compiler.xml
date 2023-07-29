@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Chat" />
+        <module name="Control" />
+        <module name="Util" />
+        <module name="Dao" />
+        <module name="ApplicationStarter" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="controller" target="17" />
+      <module name="netty" target="17" />
+      <module name="Scan" target="17" />
+      <module name="starter" target="17" />
+      <module name="tool" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ApplicationStarter" options="-parameters" />
+      <module name="Chat" options="-parameters" />
+      <module name="Control" options="-parameters" />
+      <module name="Dao" options="-parameters" />
+      <module name="Scan" options="-parameters" />
+      <module name="Util" options="-parameters" />
+      <module name="controller" options="-parameters" />
+      <module name="netty" options="-parameters" />
+      <module name="schatapp-backend" options="" />
+      <module name="starter" options="-parameters" />
+      <module name="tool" options="-parameters" />
+    </option>
+  </component>
+</project>
