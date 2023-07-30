@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>indi.midreamsheep.schatapp.backend</groupId>
-    <artifactId>Dao</artifactId>
+    <artifactId>Entity</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,4 +18,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
+    <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 </project>

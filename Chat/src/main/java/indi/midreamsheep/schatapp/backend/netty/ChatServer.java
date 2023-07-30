@@ -17,6 +17,7 @@ public class ChatServer {
     private ChatServerHandler chatServerHandler;
 
     public void run(int port) throws InterruptedException {
+        System.out.println("服务器启动");
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

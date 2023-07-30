@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.scan.annotation;
 
-import indi.midreamsheep.schatapp.backend.pojo.message.ChatType;
+import indi.midreamsheep.schatapp.backend.entity.message.ChatType;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

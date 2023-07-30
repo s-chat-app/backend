@@ -44,6 +44,7 @@ public class test {
             while (scanner.hasNextLine()) {
                 String msg = scanner.nextLine();
                 //通过channel 发送到服务器端
+                System.out.println(msg);
                 channel.writeAndFlush(msg);
             }
         }finally {
@@ -54,4 +55,7 @@ public class test {
     public static void main(String[] args) throws Exception {
         new test().run();
     }
+    /*
+    * {"chatType":0,"messageMapping":"asdsad","toId":"awdwad","data":{"name":"", "password":""}}
+    * */
 }

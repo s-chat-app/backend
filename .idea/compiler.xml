@@ -8,9 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Chat" />
+        <module name="Service" />
+        <module name="Entity" />
         <module name="Control" />
         <module name="Util" />
-        <module name="Dao" />
         <module name="ApplicationStarter" />
       </profile>
     </annotationProcessing>
@@ -27,8 +28,9 @@
       <module name="ApplicationStarter" options="-parameters" />
       <module name="Chat" options="-parameters" />
       <module name="Control" options="-parameters" />
-      <module name="Dao" options="-parameters" />
+      <module name="Entity" options="-parameters" />
       <module name="Scan" options="-parameters" />
+      <module name="Service" options="-parameters" />
       <module name="Util" options="-parameters" />
       <module name="controller" options="-parameters" />
       <module name="netty" options="-parameters" />

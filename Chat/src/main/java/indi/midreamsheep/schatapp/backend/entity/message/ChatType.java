@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.pojo.message;
+package indi.midreamsheep.schatapp.backend.entity.message;
 
 import lombok.Getter;
 
