@@ -44,7 +44,7 @@ public class test {
             while (scanner.hasNextLine()) {
                 String msg = scanner.nextLine();
                 //通过channel 发送到服务器端
-                channel.writeAndFlush(msg + "\r\n");
+                channel.writeAndFlush(msg);
             }
         }finally {
             group.shutdownGracefully();

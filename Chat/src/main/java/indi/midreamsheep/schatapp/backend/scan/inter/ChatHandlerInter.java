@@ -1,7 +1,7 @@
-package indi.midreamsheep.schatapp.backend.netty;
+package indi.midreamsheep.schatapp.backend.scan.inter;
 
 import io.netty.channel.ChannelHandlerContext;
 
-public interface ServerHandler {
+public interface ChatHandlerInter {
     void handle(ChannelHandlerContext ctx, String msg);
 }
