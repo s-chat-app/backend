@@ -7,13 +7,13 @@
     <file url="file://$PROJECT_DIR$/Entity/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Scan/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Tool/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Util/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/controller/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/netty/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/starter/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tool/src/main/java" charset="UTF-8" />
     <file url="file://E:/environment/java/maven/repository/org/springframework/boot/spring-boot-starter-parent/3.1.2/src/main/resources" charset="UTF-8" />
   </component>
 </project>

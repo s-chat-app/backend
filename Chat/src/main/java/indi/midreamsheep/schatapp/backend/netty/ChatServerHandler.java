@@ -8,21 +8,23 @@ import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
 import indi.midreamsheep.schatapp.backend.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import io.netty.channel.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @ChannelHandler.Sharable
+@Slf4j
 public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
-
         ChatMessage message;
         try {
             message = JsonUtil.getJsonToBean(msg, ChatMessage.class);
             message.check();
         } catch (Exception e) {
+            log.error("messageReceived error", e);
             return;
         }
 

@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.chat.system;
 
 import indi.midreamsheep.schatapp.backend.chat.ChannelManager;
+import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
@@ -10,6 +11,7 @@ import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
+import lombok.extern.log4j.Log4j;
 
 @ChatHandler(type = ChatType.SYSTEM, mapping = "login")
 public class SystemLoginHandler implements ChatHandlerInter {
@@ -22,9 +24,11 @@ public class SystemLoginHandler implements ChatHandlerInter {
         PrivateKey jsonToBean = JsonUtil.getJsonToBean(data, PrivateKey.class);
         String privateKey = jsonToBean.getPrivateKey();
         //TODO 向数据库进行检验
+        SChatUser user = new SChatUser();
         ctx.writeAndFlush(new Result(ResultEnum.SUCCESS,"login success"));
         //处理通道
         Channel channel = ctx.channel();
-        //ChannelManager.addChannel(privateKey, channel);
+        user.setChannel(channel);
+        channelManager.addChannel(user);
     }
 }

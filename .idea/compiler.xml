@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Chat" />
-        <module name="Service" />
         <module name="Entity" />
+        <module name="Service" />
         <module name="Control" />
         <module name="Util" />
         <module name="ApplicationStarter" />
