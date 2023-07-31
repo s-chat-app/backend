@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum ChatType {
-    INDIVIDUAL(0),
-    GROUP(1),
-    SYSTEM(2);
+    SYSTEM(1),
+    INDIVIDUAL(2),
+    GROUP(3),
+    CHANNEL(4);
     private final int id;
 
     ChatType(int id) {
@@ -19,6 +20,6 @@ public enum ChatType {
                 return type;
             }
         }
-        return null;
+        return SYSTEM;
     }
 }
