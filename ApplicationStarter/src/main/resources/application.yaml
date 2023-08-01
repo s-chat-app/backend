@@ -1,2 +1,37 @@
 logging:
   config: classpath:logback-spring.xml
+
+redis:
+  host: localhost
+  port: 6379
+  timeout: 3
+  password: 123456
+  poolMaxTotal: 10
+  poolMaxIdle: 10
+  poolMaxWait: 3
+
+spring:
+  datasource:
+    name: sp
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3906/mylearnlab?characterEncoding=utf8&useSSL=false
+    username: root
+    password: llovejava1234
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+# 配置打印sql语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

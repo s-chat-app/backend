@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.scan.inter;
+package indi.midreamsheep.schatapp.backend.api.scan.inter;
 
 import io.netty.channel.ChannelHandlerContext;
 

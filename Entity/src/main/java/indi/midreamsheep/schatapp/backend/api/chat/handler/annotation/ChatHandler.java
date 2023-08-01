@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.scan.annotation;
+package indi.midreamsheep.schatapp.backend.api.chat.handler.annotation;
 
 
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;

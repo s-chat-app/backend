@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.chat;
+package indi.midreamsheep.schatapp.backend.service.chat;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import io.netty.channel.Channel;

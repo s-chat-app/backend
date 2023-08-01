@@ -1,13 +1,18 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
+import indi.midreamsheep.schatapp.backend.chat.individual.send.IndividualChatSendHandler;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
+import indi.midreamsheep.schatapp.backend.chat.system.SystemLoginHandler;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
-import indi.midreamsheep.schatapp.backend.scan.inter.ChatHandlerInter;
+import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import io.netty.channel.*;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

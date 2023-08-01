@@ -56,6 +56,7 @@ public class test {
         new test().run();
     }
     /*
-    * {"chatType":0,"messageMapping":"asdsad","toId":"awdwad","data":{"name":"", "password":""}}
+    * {"type":1,"mapping":"login","data":{"privateKey":"123asd"}}
+    * {"type":2,"mapping":"SEND","data":{}}
     * */
 }
