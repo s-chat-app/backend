@@ -16,7 +16,7 @@ public class MysqlTest {
     public void test() {
         System.out.println("hello");
         try {
-            userMapper.insert(new User(5, "asda"));
+
         }catch (Exception e){
             e.printStackTrace();
         }
