@@ -4,7 +4,6 @@ import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.scan.ChatScanConfiguration;
 import indi.midreamsheep.schatapp.backend.netty.ChatServer;
 import jakarta.annotation.Resource;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +14,7 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @SpringBootApplication
 @ChatScanConfiguration("indi.midreamsheep.schatapp.backend.chat")
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
-@MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
+//@MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
 public class ApplicationStarter implements CommandLineRunner {
 
     @Resource
