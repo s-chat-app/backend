@@ -17,6 +17,13 @@ public class ChannelManager {
 
     public void addChannel(SChatUser user) {
         channelMap.put(user.getChannel(), user);
-        //分别添加到好友、群组、频道的通道中 TODO
+    }
+
+    public void removeChannel(Channel channel) {
+        channelMap.remove(channel);
+    }
+
+    public SChatUser getUser(Channel channel) {
+        return channelMap.get(channel);
     }
 }

@@ -12,8 +12,5 @@ import io.netty.channel.Channel;
 public class SChatUser {
     private String username;
     private String privateKey;
-    private String[] friends;
-    private String[] groups;
-    private String[] channels;
     private Channel channel;
 }
