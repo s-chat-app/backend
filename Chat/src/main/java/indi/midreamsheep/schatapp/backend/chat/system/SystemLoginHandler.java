@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.chat.system;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.dao.mysql.User;
+import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import indi.midreamsheep.schatapp.backend.dao.mysql.UserMapper;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
@@ -22,15 +22,8 @@ public class SystemLoginHandler implements ChatHandlerInter {
     @Resource
     private ChannelManager channelManager;
 
-    @Resource
-    private UserMapper userMapper;
-
     @Override
     public void handle(ChannelHandlerContext ctx, String data) {
-        System.out.println("SystemLoginHandler");
-        User user1 = userMapper.selectById(1);
-        System.out.println(user1);
-
         PrivateKey jsonToBean = JsonUtil.getJsonToBean(data, PrivateKey.class);
         String privateKey = jsonToBean.getPrivateKey();
         //TODO 向数据库进行检验

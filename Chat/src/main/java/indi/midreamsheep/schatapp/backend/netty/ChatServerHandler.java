@@ -1,20 +1,21 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.chat.individual.send.IndividualChatSendHandler;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.chat.system.SystemLoginHandler;
+import indi.midreamsheep.schatapp.backend.dao.mysql.UserMapper;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
+import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import io.netty.channel.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.math.BigInteger;
+import java.sql.Timestamp;
 
 
 @Component
@@ -22,10 +23,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
+    @Resource
+    UserMapper userMapper;
+
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
         ChatMessage message;
         try {
+            userMapper.insert(new User(new BigInteger("78798789"),"midreamsheep","123456",new Timestamp(System.currentTimeMillis())));
             message = JsonUtil.getJsonToBean(msg, ChatMessage.class);
             message.check();
         } catch (Exception e) {

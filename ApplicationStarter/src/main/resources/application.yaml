@@ -12,25 +12,11 @@ redis:
 
 spring:
   datasource:
-    name: sp
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3906/mylearnlab?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/mine?characterEncoding=utf8&useSSL=false
     username: root
     password: llovejava1234
     type: com.alibaba.druid.pool.DruidDataSource
-    filters: stat
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
-    minIdle: 1
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
 # 配置打印sql语句
 mybatis-plus:
   configuration:
