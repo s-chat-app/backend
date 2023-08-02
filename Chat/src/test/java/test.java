@@ -57,6 +57,6 @@ public class test {
     }
     /*
     * {"type":1,"mapping":"login","data":{"privateKey":"123asd"}}
-    * {"type":2,"mapping":"SEND","data":{}}
+    * {"type":2,"mapping":"SEND","data":{"message_to":"","message_type":5,"message": {asd}}}
     * */
 }

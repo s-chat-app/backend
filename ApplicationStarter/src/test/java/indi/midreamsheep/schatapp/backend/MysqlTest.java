@@ -1,7 +1,5 @@
 package indi.midreamsheep.schatapp.backend;
 
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
-import indi.midreamsheep.schatapp.backend.dao.mysql.UserMapper;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
