@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.math.BigInteger;
-import java.sql.Timestamp;
-
 @Data
 @TableName("user")
 @ToString
@@ -18,11 +15,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class User {
     @TableId("id")
-    private BigInteger id;
+    private int id;
     @TableField("name")
     private String name;
-    @TableField("data")
-    private String data;
-    @TableField("create_time")
-    private Timestamp createTime;
 }

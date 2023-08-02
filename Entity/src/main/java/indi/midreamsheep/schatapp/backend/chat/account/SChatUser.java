@@ -1,10 +1,14 @@
 package indi.midreamsheep.schatapp.backend.chat.account;
 
+import cn.hutool.json.JSONUtil;
+import indi.midreamsheep.schatapp.backend.chat.message.send.SendMessageEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import io.netty.channel.Channel;
+
+import java.math.BigInteger;
 
 @Data
 @NoArgsConstructor
@@ -12,8 +16,13 @@ import io.netty.channel.Channel;
 public class SChatUser {
     private String username;
     private String privateKey;
-    private String[] friends;
-    private String[] groups;
-    private String[] channels;
     private Channel channel;
+
+    private BigInteger[] friends;
+    private BigInteger[] groups;
+    private BigInteger[] channels;
+
+    public void receive(SendMessageEntity data) {
+        //TODO 通过通道发送信息
+    }
 }

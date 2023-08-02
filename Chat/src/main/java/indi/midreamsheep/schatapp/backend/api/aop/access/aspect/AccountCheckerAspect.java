@@ -1,6 +1,6 @@
-package indi.midreamsheep.schatapp.backend.api.aop.aspect;
+package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
-import indi.midreamsheep.schatapp.backend.api.aop.annotation.ChatAccessChecker;
+import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
