@@ -14,7 +14,7 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @SpringBootApplication
 @ChatScanConfiguration("indi.midreamsheep.schatapp.backend.chat")
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
-//@MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
+@MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
 public class ApplicationStarter implements CommandLineRunner {
 
     @Resource
