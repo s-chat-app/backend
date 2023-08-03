@@ -33,16 +33,16 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error", e);
-            ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, "message structure error")));
+            ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, 0, "message structure error")));
             return;
         }
 
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
         if (chatHandlerInter != null) {
-            ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message.getData())));
+            ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message)));
             return;
         }
-        ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR,"no such mapping in this type:"+message.getType()+" in this mapping:"+message.getMapping())));
+        ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, message.getId(),"no such mapping in this type:"+message.getType()+" in this mapping:"+message.getMapping())));
     }
 
     @Override

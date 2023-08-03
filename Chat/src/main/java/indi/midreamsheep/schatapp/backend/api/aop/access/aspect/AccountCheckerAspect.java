@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
+import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
@@ -34,8 +35,9 @@ public class AccountCheckerAspect {
         if (channelManager.getChannelMap().containsKey(ctx.channel())) {
             return pjp.proceed(pjp.getArgs());
         } else {
+            Object arg = pjp.getArgs()[1];
             log.info("用户未登录");
-            ctx.writeAndFlush(new Result(ResultEnum.ACCESS_CHECK_FAILED, "用户未登录"));
+            ctx.writeAndFlush(new Result(ResultEnum.ACCESS_CHECK_FAILED,((ChatMessage)arg).getId() ,"用户未登录"));
             return null;
         }
     }
