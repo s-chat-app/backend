@@ -3,6 +3,7 @@ package indi.midreamsheep.schatapp.backend.chat.individual.delete;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
+import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import io.netty.channel.ChannelHandlerContext;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class individualChatDeleteHandler implements ChatHandlerInter {
     @Override
     @ChatAccessChecker
-    public Result handle(ChannelHandlerContext ctx, String data) {
+    public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
         return null;
     }
 }
