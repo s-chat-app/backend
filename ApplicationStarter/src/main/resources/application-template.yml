@@ -1,0 +1,20 @@
+logging:
+  config: classpath:logback-spring.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:
+    username:
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    redis:
+      port:
+      host:
+
+# 配置打印sql语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true

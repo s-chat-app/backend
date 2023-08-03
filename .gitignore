@@ -27,3 +27,6 @@ replay_pid*
 .idea/
 *.iml
 *.ipr
+
+# exclude real profile
+ApplicationStarter/src/main/resources/application-dev.yml
