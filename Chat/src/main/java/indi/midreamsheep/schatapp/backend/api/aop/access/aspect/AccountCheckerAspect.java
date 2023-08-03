@@ -12,6 +12,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+/**
+ * 权限检查切面
+ * 用于检查用户是否登录, 未登录则不允许访问
+ * 判断用户是否登录的依据是channel是否在channelManager中
+ * */
 @Aspect
 @Slf4j
 @Component
@@ -22,7 +27,6 @@ public class AccountCheckerAspect {
 
     @Around(value = "@annotation(chatAccessChecker)")
     public Object around(ProceedingJoinPoint pjp, ChatAccessChecker chatAccessChecker) throws Throwable {
-        System.out.println("进入切面");
         Object obj = pjp.getArgs()[0];
         if(!(obj instanceof ChannelHandlerContext ctx)){
             return pjp.proceed(pjp.getArgs());

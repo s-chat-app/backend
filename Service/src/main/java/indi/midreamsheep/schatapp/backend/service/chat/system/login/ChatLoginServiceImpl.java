@@ -8,8 +8,6 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
-
 @Component
 public class ChatLoginServiceImpl implements ChatLoginService{
 
@@ -26,28 +24,28 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         user.setChannel(ctx.channel());
         channelManager.addChannel(user);
         //TODO 通过数据库查询好友、群组、频道信息 获取id数组
-        BigInteger[] indi = new BigInteger[0];
+        long[] indi = new long[0];
         loginIndividualChat(user, indi);
 
-        BigInteger[] group = new BigInteger[0];
+        long[] group = new long[0];
         loginIndividualChat(user, group);
 
-        BigInteger[] channel = new BigInteger[0];
+        long[] channel = new long[0];
         loginIndividualChat(user, channel);
 
     }
-    private void loginIndividualChat(SChatUser user, BigInteger[] ids) {
-        for (BigInteger id : ids) {
+    private void loginIndividualChat(SChatUser user, long[] ids) {
+        for (long id : ids) {
            individualChatManager.addIndividualChat(id, user);
         }
     }
-    private void loginGroupChat(SChatUser user, BigInteger[] ids) {
-        for (BigInteger id : ids) {
+    private void loginGroupChat(SChatUser user, long[] ids) {
+        for (long id : ids) {
             //TODO
         }
     }
-    private void loginChannelChat(SChatUser user, BigInteger[] ids) {
-        for (BigInteger id : ids) {
+    private void loginChannelChat(SChatUser user, long[] ids) {
+        for (long id : ids) {
             //TODO
         }
     }

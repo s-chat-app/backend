@@ -16,15 +16,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.jmx.support.RegistrationPolicy;
 
+/**
+ * 整个项目的启动类
+ * */
+/*启动类标识*/
 @SpringBootApplication
+/*扫描指定的聊天处理器*/
 @ChatScanConfiguration("indi.midreamsheep.schatapp.backend.chat")
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
+/*扫描指定路径下的mapper*/
 @MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
 public class ApplicationStarter implements CommandLineRunner {
 
+    /**用于启动netty通讯服务*/
     @Resource
     private ChatServer chatServer;
 
+    /**用于注册netty服务的处理器*/
     @Resource
     private ConfigurableApplicationContext context;
 
@@ -33,9 +41,11 @@ public class ApplicationStarter implements CommandLineRunner {
     }
 
 
+    /**回调启动netty服务*/
     @Override
     public void run(String... args) throws Exception {
         ChatHandlerMapper.init(context);
         chatServer.run(7524);
     }
 }
+

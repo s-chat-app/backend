@@ -12,7 +12,7 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-@ChatHandler(type = ChatType.SYSTEM, mapping = "login")
+@ChatHandler(type = ChatType.SYSTEM, mapping = "LOGIN")
 @Component
 public class SystemLoginHandler implements ChatHandlerInter {
 
