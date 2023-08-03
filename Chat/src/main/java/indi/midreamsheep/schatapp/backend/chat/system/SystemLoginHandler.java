@@ -1,5 +1,6 @@
 package indi.midreamsheep.schatapp.backend.chat.system;
 
+import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.Result;
 import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
@@ -12,24 +13,21 @@ import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-@ChatHandler(type = ChatType.SYSTEM, mapping = "login")
+@ChatHandler(type = ChatType.SYSTEM, mapping = "LOGIN")
 @Component
 public class SystemLoginHandler implements ChatHandlerInter {
-
-    @Resource
-    private ChannelManager channelManager;
 
     @Resource
     private ChatLoginService chatLoginService;
 
     @Override
-    public Result handle(ChannelHandlerContext ctx, String data) {
-        PrivateKey jsonToBean = JsonUtil.getJsonToBean(data, PrivateKey.class);
+    public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
+        PrivateKey jsonToBean = JsonUtil.getJsonToBean(data.getData(), PrivateKey.class);
         //空检查
         if (jsonToBean == null || jsonToBean.getPrivateKey() == null) {
-            return new Result(ResultEnum.ERROR, "privateKey is null");
+            return new Result(ResultEnum.ERROR, data.getId(),"privateKey is null");
         }
         chatLoginService.login(ctx, jsonToBean);
-        return new Result(ResultEnum.SUCCESS, "login success");
+        return new Result(ResultEnum.SUCCESS,data.getId(), "login success");
     }
 }
