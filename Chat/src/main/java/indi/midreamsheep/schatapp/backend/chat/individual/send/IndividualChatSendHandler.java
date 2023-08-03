@@ -33,6 +33,10 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
         SendMessageEntity jsonToBean = JsonUtil.getJsonToBean(data, SendMessageEntity.class);
         //获取用户信息
         SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
+        jsonToBean.setMessageFrom(sChatUser.getId());
+        //雪花算法计算id
+
+
         individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
         //TODO 返回消息id 通知发送成功
         return new Result(ResultEnum.SUCCESS, "send success");

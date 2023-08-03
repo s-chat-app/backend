@@ -5,9 +5,6 @@ import indi.midreamsheep.schatapp.backend.chat.message.send.SendMessageEntity;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
 import jakarta.annotation.Resource;
-import org.springframework.stereotype.Repository;
-
-import java.math.BigInteger;
 
 public class IndividualChatSendServiceImpl implements IndividualChatSendService{
 
@@ -23,7 +20,7 @@ public class IndividualChatSendServiceImpl implements IndividualChatSendService{
 
     @Override
     public void send(SChatUser user, SendMessageEntity data) {
-        IndividualChatEntity individualChat = individualChatManager.getIndividualChat(new BigInteger(data.getMessageTo()));
+        IndividualChatEntity individualChat = individualChatManager.getIndividualChat(data.getMessageTo());
         individualChat.send(user, data);
     }
 }

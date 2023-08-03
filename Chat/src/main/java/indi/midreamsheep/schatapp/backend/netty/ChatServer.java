@@ -10,6 +10,11 @@ import io.netty.handler.codec.string.StringEncoder;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
+/**
+ * netty服务启动类，用于启动netty服务
+ * 加密方式：TODO
+ * @see ChatServerHandler netty处理器
+ * */
 @Component
 public class ChatServer {
 

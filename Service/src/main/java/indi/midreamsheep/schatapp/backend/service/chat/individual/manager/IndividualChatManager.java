@@ -4,15 +4,14 @@ import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class IndividualChatManager {
-    Map<BigInteger, IndividualChatEntity> individualChatMap = new ConcurrentHashMap<>();
+    Map<Long, IndividualChatEntity> individualChatMap = new ConcurrentHashMap<>();
 
-    public void addIndividualChat(BigInteger id, SChatUser user) {
+    public void addIndividualChat(long id, SChatUser user) {
         if(individualChatMap.containsKey(id)){
             individualChatMap.get(id).getUsers()[1] = user;
             return;
@@ -27,7 +26,7 @@ public class IndividualChatManager {
     public void addIndividualChat(IndividualChatEntity individualChatEntity) {
         individualChatMap.put(individualChatEntity.getId(), individualChatEntity);
     }
-    public IndividualChatEntity getIndividualChat(BigInteger id) {
+    public IndividualChatEntity getIndividualChat(long id) {
         return individualChatMap.get(id);
     }
 }

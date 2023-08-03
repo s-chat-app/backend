@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class IndividualChatEntity extends AbstractChatEntity {
      private final SChatUser[] users = new SChatUser[2];

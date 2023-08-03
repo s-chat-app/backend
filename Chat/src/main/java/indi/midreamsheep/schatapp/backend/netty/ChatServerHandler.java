@@ -1,5 +1,6 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
+import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
@@ -11,8 +12,14 @@ import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
-
+/**
+ * netty消息接受分发处理器
+ * 通过注解{@link ChatHandler}指定消息类型和消息映射并注册到{@link ChatHandlerMapper}中由当前对象处理
+ * 收到消息后会先进行json解析，解析失败则返回错误消息
+ * 解析成功后会根据消息类型和消息映射从{@link ChatHandlerMapper}中获取对应的处理器并进行处理
+ * 处理器注册方式见{@link ChatHandler}
+ * @see ChatHandlerInter
+ * */
 @Component
 @ChannelHandler.Sharable
 @Slf4j
