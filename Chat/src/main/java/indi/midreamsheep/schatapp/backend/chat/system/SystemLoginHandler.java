@@ -2,11 +2,10 @@ package indi.midreamsheep.schatapp.backend.chat.system;
 
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.Result;
-import indi.midreamsheep.schatapp.backend.protocol.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.system.login.ChatLoginService;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -24,10 +23,9 @@ public class SystemLoginHandler implements ChatHandlerInter {
     public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
         PrivateKey jsonToBean = JsonUtil.getJsonToBean(data.getData(), PrivateKey.class);
         //空检查
-        if (jsonToBean == null || jsonToBean.getPrivateKey() == null) {
+        if (jsonToBean == null || jsonToBean.getPrivateKey() == 0) {
             return new Result(ResultEnum.ERROR, data.getId(),"privateKey is null");
         }
-        chatLoginService.login(ctx, jsonToBean);
-        return new Result(ResultEnum.SUCCESS,data.getId(), "login success");
+        return chatLoginService.login(ctx, jsonToBean,data);
     }
 }

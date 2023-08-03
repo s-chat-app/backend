@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.protocol;
+package indi.midreamsheep.schatapp.backend.protocol.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

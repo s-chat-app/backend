@@ -8,20 +8,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Timestamp;
-
+@TableName("user_mapper")
 @Data
-@TableName("user")
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+@ToString
+public class UserMap {
     @TableId("id")
     private long id;
-    @TableField("name")
-    private String name;
-    @TableField("data")
-    private String data;
-    @TableField("create_time")
-    private Timestamp time;
+    @TableField("user_0")
+    private long user0;
+    @TableField("user_1")
+    private long user1;
 }

@@ -56,7 +56,7 @@ public class test {
         new test().run();
     }
     /*
-    * {"type":1,"mapping":"login","data":{"privateKey":"123asd"}}
+    * {"id":454,"type":1,"mapping":"LOGIN","data":{"privateKey":0}}
     * {"type":2,"mapping":"SEND","data":{"message_to":"","message_type":5,"message": {asd}}}
     * */
 }

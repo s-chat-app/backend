@@ -1,5 +1,6 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
+import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

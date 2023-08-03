@@ -10,18 +10,25 @@ import lombok.ToString;
 
 import java.sql.Timestamp;
 
+
 @Data
-@TableName("user")
-@ToString
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+@ToString
+@TableName("message")
+public class Message {
     @TableId("id")
     private long id;
-    @TableField("name")
-    private String name;
-    @TableField("data")
-    private String data;
-    @TableField("create_time")
-    private Timestamp time;
+    @TableField("type")
+    private int type;
+    @TableField("message_type")
+    private int messageType;
+    @TableField("message")
+    private String message;
+    @TableField("message_to")
+    private long messageTo;
+    @TableField("message_from")
+    private long messageFrom;
+    @TableField("message_time")
+    private Timestamp messageTime;
 }
