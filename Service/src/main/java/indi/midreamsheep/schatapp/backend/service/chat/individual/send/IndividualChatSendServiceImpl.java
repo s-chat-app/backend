@@ -19,14 +19,14 @@ public class IndividualChatSendServiceImpl implements IndividualChatSendService{
     IndividualChatManager individualChatManager;
 
     @Resource
-    private MessageMapperHandler messageMapperHandler;
+    private MessageMapperHandlerImpl messageMapperHandlerImpl;
 
     @Override
     public Message endurance(SChatUser user, Message data) {
         data.setId(IdUtil.getSnowflake().nextId());
         data.setMessageTime(new Timestamp(System.currentTimeMillis()));
         data.setMessageFrom(user.getId());
-        messageMapperHandler.insertMessage(data);
+        messageMapperHandlerImpl.insertMessage(data);
         return data;
     }
 

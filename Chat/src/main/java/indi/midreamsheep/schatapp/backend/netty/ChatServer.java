@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
+import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -22,7 +23,11 @@ public class ChatServer {
     @Resource
     private ChatServerHandler chatServerHandler;
 
+    @Resource
+    private UserStateManager userStateManager;
+
     public void run(int port) throws InterruptedException {
+        userStateManager.addUser(123456,1);
         System.out.println("服务器启动");
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
