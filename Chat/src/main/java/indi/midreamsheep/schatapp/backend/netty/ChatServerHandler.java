@@ -36,7 +36,6 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, 0, "message structure error")));
             return;
         }
-
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
         if (chatHandlerInter != null) {
             ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message)));

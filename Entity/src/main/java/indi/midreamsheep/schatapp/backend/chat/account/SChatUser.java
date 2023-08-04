@@ -3,6 +3,7 @@ package indi.midreamsheep.schatapp.backend.chat.account;
 import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSender;
 import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSenderTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +18,13 @@ public class SChatUser {
     /**用户id*/
     private long id;
     /**用户名*/
-    private String username;
+    private User userData;
     /**用户密钥*/
     private long privateKey;
     /**通道*/
     private Channel channel;
     /**好友列表*/
-    private long[] friends;
+    private long[] individuals;
     /**群组列表*/
     private long[] groups;
     /**通道列表*/

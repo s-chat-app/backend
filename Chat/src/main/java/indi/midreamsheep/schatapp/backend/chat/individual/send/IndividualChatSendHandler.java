@@ -31,9 +31,14 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     @Override
     @ChatAccessChecker
     public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
-        Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
-        SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
-        individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
+        try {
+            Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
+            SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
+            individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
+        }catch (Exception e){
+            log.error("发送消息失败", e);
+            return new Result(ResultEnum.ERROR,data.getId(), "send error");
+        }
         return new Result(ResultEnum.SUCCESS,data.getId(), "send success");
     }
 }

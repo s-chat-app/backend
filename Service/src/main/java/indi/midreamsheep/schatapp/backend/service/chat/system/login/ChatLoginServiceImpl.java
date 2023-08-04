@@ -4,6 +4,7 @@ import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandler;
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.protocol.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
@@ -11,9 +12,11 @@ import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.Indivi
 import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class ChatLoginServiceImpl implements ChatLoginService{
 
     @Resource
@@ -26,7 +29,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserStateManager userStateManager;
 
     @Resource
-    private UserMapperHandler userMapperHandler;
+    private UserMapperHandlerImpl userMapperHandlerImpl;
 
     @Override
     public Result login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
@@ -34,12 +37,15 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         if(userId == -1){
             return new Result(ResultEnum.ERROR,data.getId(), "privateKey is error");
         }
-        SChatUser user = userMapperHandler.getUserById(userId);
+        SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
+        user.setPrivateKey(privateKey.getPrivateKey());
         channelManager.addChannel(user);
-        loginIndividualChat(user, user.getFriends());
-        loginGroupChat(user, user.getGroups());
-        loginChannelChat(user, user.getChannels());
+        log.info("用户信息:{}", user);
+        loginIndividualChat(user, user.getIndividuals());
+/*        loginGroupChat(user, user.getGroups());
+        loginChannelChat(user, user.getChannels());*/
+        log.info("用户登录成功");
         return new Result(ResultEnum.SUCCESS, data.getId(), "login success");
 
     }
