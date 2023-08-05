@@ -9,11 +9,11 @@ import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
 import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.util.response.Result;
+import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.send.IndividualChatSendService;
-import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     private IndividualChatSendService individualChatSendService;
 
     @Override
-    @ChatAccessChecker(ChatDataTypeEnum.SEND_MESSAGE)
+    @ChatAccessChecker(check = ChatDataTypeEnum.SEND_MESSAGE)
     public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
         try {
             Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);

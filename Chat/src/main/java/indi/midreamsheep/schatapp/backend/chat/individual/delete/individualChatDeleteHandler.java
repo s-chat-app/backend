@@ -7,7 +7,6 @@ import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
 import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Component;
 @ChatHandler(type = ChatType.INDIVIDUAL, mapping = "SEND")
 public class individualChatDeleteHandler implements ChatHandlerInter {
     @Override
-    @ChatAccessChecker(ChatDataTypeEnum.DELETE_MESSAGE)
+    @ChatAccessChecker(check = ChatDataTypeEnum.DELETE_MESSAGE)
     public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
         return null;
     }

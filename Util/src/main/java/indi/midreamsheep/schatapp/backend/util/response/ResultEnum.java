@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.protocol.result;
+package indi.midreamsheep.schatapp.backend.util.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,7 @@ public enum ResultEnum {
     ERROR(500, "error"),
     NOT_FOUND(404, "request processor not found"),
     ACCESS_CHECK_FAILED(325, "user permissions are not passed"),
+    MALFORMED_REQUEST(403, "malformed request")
     ;
     private final int code;
     private final String msg;

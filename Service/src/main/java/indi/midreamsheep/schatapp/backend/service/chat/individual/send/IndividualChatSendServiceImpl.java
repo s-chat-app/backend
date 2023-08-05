@@ -11,7 +11,7 @@ import indi.midreamsheep.schatapp.backend.service.service.chat.individual.Indivi
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-import static indi.midreamsheep.schatapp.backend.until.TimeUtil.now;
+import static indi.midreamsheep.schatapp.backend.util.TimeUtil.now;
 
 
 @Component
