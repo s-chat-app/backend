@@ -4,7 +4,7 @@ import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSender;
 import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSenderTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
-import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,7 @@
-package indi.midreamsheep.schatapp.backend.until.dao.redis;
+package indi.midreamsheep.schatapp.backend.util.dao.redis;
 
 import com.alibaba.fastjson.JSON;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

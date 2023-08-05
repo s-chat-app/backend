@@ -2,8 +2,8 @@ package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.util.response.Result;
+import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;

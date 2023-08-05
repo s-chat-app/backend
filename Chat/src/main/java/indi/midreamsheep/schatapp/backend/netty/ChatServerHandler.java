@@ -4,10 +4,11 @@ import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandle
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.response.ResponseProcessor;
+import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
+import indi.midreamsheep.schatapp.backend.util.response.StatusCode;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,15 +34,18 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error", e);
-            ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, 0, "message structure error")));
+            ResponseProcessor.sendResponseToContext(ctx, ResultEnum.MALFORMED_REQUEST, "message structure error");
             return;
         }
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
-        if (chatHandlerInter != null) {
-            ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message)));
-            return;
+        try {
+            if (chatHandlerInter != null) {
+                throw new StatusCode(ResultEnum.NOT_FOUND, message.getId(), "no such mapper");
+            }
+            ResponseProcessor.sendResponseToContext(ctx, chatHandlerInter.handle(ctx, message));
+        } catch (Throwable t) {
+            ResponseProcessor.sendFailedResponseToContext(ctx, t);
         }
-        ctx.writeAndFlush(JsonUtil.getBeanToJson(new Result(ResultEnum.ERROR, message.getId(),"no such mapping in this type:"+message.getType()+" in this mapping:"+message.getMapping())));
     }
 
     @Override
