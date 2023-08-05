@@ -3,6 +3,7 @@ package indi.midreamsheep.schatapp.backend.service.dao.mysql;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,6 @@ import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @TableName("message")
 public class Message {
     @TableId("id")
@@ -31,4 +31,9 @@ public class Message {
     private long messageFrom;
     @TableField("message_time")
     private Timestamp messageTime;
+
+    @Override
+    public String toString() {
+        return JsonUtil.getBeanToJson(this);
+    }
 }

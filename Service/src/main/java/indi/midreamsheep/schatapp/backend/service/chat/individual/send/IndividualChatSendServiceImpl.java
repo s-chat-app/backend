@@ -2,6 +2,7 @@ package indi.midreamsheep.schatapp.backend.service.chat.individual.send;
 
 import cn.hutool.core.util.IdUtil;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.message.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.message.MessageMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
@@ -27,6 +28,7 @@ public class IndividualChatSendServiceImpl implements IndividualChatSendService{
         data.setId(IdUtil.getSnowflake().nextId());
         data.setMessageTime(now());
         data.setMessageFrom(user.getId());
+        data.setType(ChatType.INDIVIDUAL.getId());
         messageMapperHandlerImpl.insertMessage(data);
         return data;
     }

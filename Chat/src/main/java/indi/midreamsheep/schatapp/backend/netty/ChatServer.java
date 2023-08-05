@@ -28,6 +28,7 @@ public class ChatServer {
 
     public void run(int port) throws InterruptedException {
         userStateManager.addUser(123456,1);
+        userStateManager.addUser(1234567,2);
         System.out.println("服务器启动");
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
