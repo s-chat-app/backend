@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.chat.account;
 
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSender;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatDataSenderTypeEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
@@ -31,6 +31,6 @@ public class SChatUser {
     private long[] channels;
 
     public void receive(Message data) {
-        channel.writeAndFlush(JsonUtil.getBeanToJson(new ChatDataSender(ChatDataSenderTypeEnum.SEND.getType(), JsonUtil.getBeanToJson(data))));
+        channel.writeAndFlush(JsonUtil.getBeanToJson(new ChatDataProtocol(-1, ChatDataTypeEnum.SEND_MESSAGE.getCode(),data.toString())));
     }
 }
