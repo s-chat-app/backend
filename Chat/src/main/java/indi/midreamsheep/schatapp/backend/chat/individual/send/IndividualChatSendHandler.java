@@ -31,7 +31,7 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     private IndividualChatSendService individualChatSendService;
 
     @Override
-    @ChatAccessChecker(ChatDataTypeEnum.SEND_MESSAGE)
+    @ChatAccessChecker(check = ChatDataTypeEnum.SEND_MESSAGE)
     public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
         try {
             Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);

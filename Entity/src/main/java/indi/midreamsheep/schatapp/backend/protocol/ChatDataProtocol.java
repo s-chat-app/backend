@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.protocol;
 
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.until.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.util.response.Result;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
