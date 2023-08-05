@@ -3,8 +3,9 @@ package indi.midreamsheep.schatapp.backend.service.chat.system.login;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandlerImpl;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
 import indi.midreamsheep.schatapp.backend.protocol.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
@@ -32,21 +33,20 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandlerImpl userMapperHandlerImpl;
 
     @Override
-    public Result login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public ChatDataProtocol login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
-            return new Result(ResultEnum.ERROR,data.getId(), "privateKey is error");
+            return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.ERROR,"not find user").toString());
         }
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
         user.setPrivateKey(privateKey.getPrivateKey());
         channelManager.addChannel(user);
-        log.info("用户信息:{}", user);
         loginIndividualChat(user, user.getIndividuals());
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
         log.info("用户登录成功");
-        return new Result(ResultEnum.SUCCESS, data.getId(), "login success");
+        return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
 
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {

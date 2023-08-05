@@ -6,6 +6,8 @@ import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.protocol.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.result.ResultEnum;
@@ -29,16 +31,16 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     private IndividualChatSendService individualChatSendService;
 
     @Override
-    @ChatAccessChecker
-    public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
+    @ChatAccessChecker(ChatDataTypeEnum.SEND_MESSAGE)
+    public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
         try {
             Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
             SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
             individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
         }catch (Exception e){
             log.error("发送消息失败", e);
-            return new Result(ResultEnum.ERROR,data.getId(), "send error");
+            return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.SEND_MESSAGE.getCode(), new Result(ResultEnum.ERROR).toString());
         }
-        return new Result(ResultEnum.SUCCESS,data.getId(), "send success");
+        return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.SEND_MESSAGE.getCode(), new Result(ResultEnum.SUCCESS).toString());
     }
 }
