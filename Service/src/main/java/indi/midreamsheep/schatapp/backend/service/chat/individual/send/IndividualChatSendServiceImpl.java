@@ -10,7 +10,8 @@ import indi.midreamsheep.schatapp.backend.service.service.chat.individual.Indivi
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
+import static indi.midreamsheep.schatapp.backend.until.TimeUtil.now;
+
 
 @Component
 public class IndividualChatSendServiceImpl implements IndividualChatSendService{
@@ -24,7 +25,7 @@ public class IndividualChatSendServiceImpl implements IndividualChatSendService{
     @Override
     public Message endurance(SChatUser user, Message data) {
         data.setId(IdUtil.getSnowflake().nextId());
-        data.setMessageTime(new Timestamp(System.currentTimeMillis()));
+        data.setMessageTime(now());
         data.setMessageFrom(user.getId());
         messageMapperHandlerImpl.insertMessage(data);
         return data;
