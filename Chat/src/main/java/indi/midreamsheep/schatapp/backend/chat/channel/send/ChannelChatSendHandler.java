@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @ChatHandler(mapping = "SEND", type = ChatType.CHANNEL)
 public class ChannelChatSendHandler implements ChatHandlerInter {
     @Override
-    public Result handle(ChannelHandlerContext ctx, ChatMessage data) {
+    public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
         return null;
     }
 }

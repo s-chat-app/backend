@@ -5,5 +5,5 @@ import indi.midreamsheep.schatapp.backend.util.response.Result;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface ChatHandlerInter {
-    Result handle(ChannelHandlerContext ctx, ChatMessage data);
+    ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data);
 }

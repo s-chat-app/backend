@@ -6,6 +6,8 @@ import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.util.response.Result;
 import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
+import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
@@ -31,21 +33,20 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandlerImpl userMapperHandlerImpl;
 
     @Override
-    public Result login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public ChatDataProtocol login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
-            return new Result(ResultEnum.ERROR,data.getId(), "privateKey is error");
+            return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.ERROR,"not find user").toString());
         }
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
         user.setPrivateKey(privateKey.getPrivateKey());
         channelManager.addChannel(user);
-        log.info("用户信息:{}", user);
         loginIndividualChat(user, user.getIndividuals());
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
         log.info("用户登录成功");
-        return new Result(ResultEnum.SUCCESS, data.getId(), "login success");
+        return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
 
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
