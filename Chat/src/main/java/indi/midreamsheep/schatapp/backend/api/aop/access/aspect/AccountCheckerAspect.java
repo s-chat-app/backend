@@ -37,7 +37,7 @@ public class AccountCheckerAspect {
         } else {
             Object arg = pjp.getArgs()[1];
             log.info("用户未登录");
-            ctx.writeAndFlush(new Result(ResultEnum.ACCESS_CHECK_FAILED,((ChatMessage)arg).getId() ,"用户未登录"));
+            ctx.writeAndFlush(new ChatDataProtocol(((ChatMessage) arg).getId(), chatAccessChecker.value().getCode(), new Result(ResultEnum.ACCESS_CHECK_FAILED).toString()));
             return null;
         }
     }
