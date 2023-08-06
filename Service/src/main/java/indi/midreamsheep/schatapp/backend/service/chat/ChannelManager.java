@@ -17,6 +17,7 @@ public class ChannelManager {
 
     public void addChannel(SChatUser user) {
         channelMap.put(user.getChannel(), user);
+        System.out.println(user.getChannel().hashCode());
     }
 
     public void removeChannel(Channel channel) {

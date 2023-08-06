@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.util;
+package indi.midreamsheep.schatapp.backend.util.entity;
 
 import java.sql.Timestamp;
 

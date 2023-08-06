@@ -36,6 +36,7 @@ public class AccountCheckerAspect {
         if (!(obj instanceof ChannelHandlerContext ctx)) {
             return pjp.proceed(pjp.getArgs());
         }
+        System.out.println(ctx.channel().hashCode());
         if (channelManager.getChannelMap().containsKey(ctx.channel())) {
             return pjp.proceed(pjp.getArgs());
         } else {

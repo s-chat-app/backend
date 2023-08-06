@@ -21,40 +21,22 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @TableName("group")
 public class Group {
-    /**
-     * Group ID
-     * Generated with snowflake
-     */
+    /**Group ID Generated with snowflake*/
     @TableId(value = "id")
-    private Long id;
-
-    /**
-     * Group Name
-     */
+    private long id;
+    /**Group Name*/
     @TableField("group_name")
     private String groupName;
-
-    /**
-     * Group Owner
-     */
+    /**Group Owner*/
     @TableField("group_owner")
-    private Long groupOwner;
-
-    /**
-     * Group Data
-     */
+    private long groupOwner;
+    /**Group Data*/
     @TableField("group_data")
     private String groupData;
-
-    /**
-     * Group State
-     */
+    /**Group State*/
     @TableField("group_state")
-    private Integer group_state;
-
-    /**
-     * Create Time
-     */
+    private int group_state;
+    /**Create Time*/
     @TableField("create_time")
     private Timestamp createTime;
 

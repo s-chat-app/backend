@@ -27,6 +27,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
+        System.out.println(msg);
         ChatMessage message;
         try {
             message = JsonUtil.getJsonToBean(msg, ChatMessage.class);

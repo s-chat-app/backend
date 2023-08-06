@@ -9,7 +9,7 @@ import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import static indi.midreamsheep.schatapp.backend.util.TimeUtil.now;
+import static indi.midreamsheep.schatapp.backend.util.entity.TimeUtil.now;
 
 /**
  * Implements group chat logics
