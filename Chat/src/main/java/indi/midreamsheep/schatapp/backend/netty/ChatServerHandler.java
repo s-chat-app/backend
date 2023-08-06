@@ -8,8 +8,6 @@ import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
-import indi.midreamsheep.schatapp.backend.util.response.Result;
-import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

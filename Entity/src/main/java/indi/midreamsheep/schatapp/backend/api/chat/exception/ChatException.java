@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.api.exception;
+package indi.midreamsheep.schatapp.backend.api.chat.exception;
 
 
 import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
@@ -8,13 +8,15 @@ import lombok.Getter;
 public class ChatException extends RuntimeException{
 
     /**错误码*/
-    private int code;
+    private final int code;
     /**错误信息*/
-    private String msg;
+    private final String msg;
 
 
     public ChatException(String message) {
             super(message);
+            code = ResultEnum.ERROR.getCode();
+            msg = ResultEnum.ERROR.getMsg();
     }
     public ChatException(String message,int code,String msg) {
         super(message);

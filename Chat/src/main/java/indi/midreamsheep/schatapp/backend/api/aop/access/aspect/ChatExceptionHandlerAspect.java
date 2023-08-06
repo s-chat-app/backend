@@ -1,9 +1,10 @@
 package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
+import com.alibaba.fastjson.JSONException;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.api.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.netty.ResponseProcessor;
+import indi.midreamsheep.schatapp.backend.protocol.ResponseProcessor;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,8 +19,6 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class ChatExceptionHandlerAspect {
 
-    @Resource
-    private ResponseProcessor responseProcessor;
 
     @Around(value = "@annotation(chatExceptionHandler)")
     public Object around(ProceedingJoinPoint pjp, ChatExceptionHandler chatExceptionHandler) throws Throwable {
@@ -27,7 +26,13 @@ public class ChatExceptionHandlerAspect {
             return pjp.proceed(pjp.getArgs());
         }catch (ChatException chatException){
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
-            return responseProcessor.makeExceptionResponse(arg.getId(),arg.getType(), chatException);
+            return ResponseProcessor.makeExceptionResponse(arg.getId(),arg.getType(), chatException);
+        }catch (JSONException jsonException) {
+            ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
+            return ResponseProcessor.makeExceptionResponse(arg.getId(), arg.getType(), "error json format");
+        }catch (Throwable throwable){
+            ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
+            return ResponseProcessor.makeExceptionResponse(arg.getId(), arg.getType(), throwable.getMessage());
         }
     }
 }

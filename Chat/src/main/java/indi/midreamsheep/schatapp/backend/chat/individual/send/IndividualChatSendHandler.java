@@ -2,7 +2,6 @@ package indi.midreamsheep.schatapp.backend.chat.individual.send;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.api.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
@@ -10,11 +9,11 @@ import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandle
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
-import indi.midreamsheep.schatapp.backend.util.response.Result;
-import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.send.IndividualChatSendService;
+import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
@@ -36,16 +35,9 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     @ChatAccessChecker(check = TransmissionEnum.SEND_MESSAGE)
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
-        throw new ChatException("guess why");
-/*        try {
-            Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
-            SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
-            individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
-        }catch (Exception e){
-            log.error("发送消息失败", e);
-            //return new ChatTransmission(data.getId(), TransmissionEnum.SEND_MESSAGE.getCode(), new Result(ResultEnum.ERROR).toString());
-        }
-        //TODO return new ChatTransmission(data.getId(), TransmissionEnum.SEND_MESSAGE.getCode(), new Result(ResultEnum.SUCCESS).toString());
-        return null;*/
+        Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
+        SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
+        individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
+        return new ChatTransmission(data.getId(),TransmissionEnum.SEND_MESSAGE,new Result(ResultEnum.SUCCESS));
     }
 }

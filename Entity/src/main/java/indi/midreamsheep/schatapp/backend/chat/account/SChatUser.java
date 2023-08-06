@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.chat.account;
 
 import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.ResponseProcessor;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
@@ -31,6 +32,6 @@ public class SChatUser {
     private long[] channels;
 
     public void receive(Message data) {
-        //TODO channel.writeAndFlush(JsonUtil.getBeanToJson(new ChatTransmission(-1, TransmissionEnum.SEND_MESSAGE.getCode(),data)));
+        channel.writeAndFlush(ResponseProcessor.makeExceptionResponse(-1,TransmissionEnum.SEND_MESSAGE.getCode(), data));
     }
 }
