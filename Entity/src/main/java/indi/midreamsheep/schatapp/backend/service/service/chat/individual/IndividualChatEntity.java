@@ -21,3 +21,4 @@ public class IndividualChatEntity extends AbstractChatEntity {
          }
      }
 }
+

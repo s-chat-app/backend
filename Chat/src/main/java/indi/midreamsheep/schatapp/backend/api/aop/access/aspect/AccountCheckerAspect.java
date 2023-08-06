@@ -1,10 +1,11 @@
 package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
+import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
+import indi.midreamsheep.schatapp.backend.api.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
-import indi.midreamsheep.schatapp.backend.util.response.Result;
-import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
+import indi.midreamsheep.schatapp.backend.netty.ResponseProcessor;
+import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,24 +24,25 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 @Component
+@Order(5)
 public class AccountCheckerAspect {
 
     @Resource
     private ChannelManager channelManager;
 
+
+
     @Around(value = "@annotation(chatAccessChecker)")
+    @Order(1)
     public Object around(ProceedingJoinPoint pjp, ChatAccessChecker chatAccessChecker) throws Throwable {
         Object obj = pjp.getArgs()[0];
-        if(!(obj instanceof ChannelHandlerContext ctx)){
+        if (!(obj instanceof ChannelHandlerContext ctx)) {
             return pjp.proceed(pjp.getArgs());
         }
         if (channelManager.getChannelMap().containsKey(ctx.channel())) {
             return pjp.proceed(pjp.getArgs());
         } else {
-            Object arg = pjp.getArgs()[1];
-            log.info("用户未登录");
-            ctx.writeAndFlush(new ChatDataProtocol(((ChatMessage) arg).getId(), chatAccessChecker.check().getCode(), new Result(ResultEnum.ACCESS_CHECK_FAILED).toString()));
-            return null;
+            throw new ChatException("not login", ResultEnum.ACCESS_CHECK_FAILED);
         }
     }
 

@@ -1,7 +1,8 @@
 package indi.midreamsheep.schatapp.backend.api.aop.access.annotation;
 
 
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
+import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
+import org.springframework.core.annotation.Order;
 
 import java.lang.annotation.*;
 
@@ -9,5 +10,5 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Documented
 public @interface ChatAccessChecker {
-    ChatDataTypeEnum value();
+    TransmissionEnum check();
 }

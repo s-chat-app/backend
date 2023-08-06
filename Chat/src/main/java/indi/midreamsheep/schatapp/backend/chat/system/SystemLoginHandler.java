@@ -1,9 +1,11 @@
 package indi.midreamsheep.schatapp.backend.chat.system;
 
+import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
+import indi.midreamsheep.schatapp.backend.api.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.service.chat.system.login.ChatLoginService;
@@ -24,14 +26,16 @@ public class SystemLoginHandler implements ChatHandlerInter {
     private ChatLoginService chatLoginService;
 
     @Override
-    public ChatDataProtocol handle(ChannelHandlerContext ctx, ChatMessage data) {
+    @ChatExceptionHandler
+    public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
         log.info("一个用户登录");
-        PrivateKey jsonToBean = JsonUtil.getJsonToBean(data.getData(), PrivateKey.class);
+        throw new ChatException("guess why");
+/*        PrivateKey jsonToBean = JsonUtil.getJsonToBean(data.getData(), PrivateKey.class);
         //空检查
         if (jsonToBean == null || jsonToBean.getPrivateKey() == 0) {
-            return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
+            //return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
         }
         log.info("privateKey:{}", jsonToBean.getPrivateKey());
-        return chatLoginService.login(ctx, jsonToBean,data);
+        return chatLoginService.login(ctx, jsonToBean,data);*/
     }
 }

@@ -6,8 +6,8 @@ import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.util.response.Result;
 import indi.midreamsheep.schatapp.backend.util.response.ResultEnum;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
@@ -33,10 +33,10 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandlerImpl userMapperHandlerImpl;
 
     @Override
-    public ChatDataProtocol login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public ChatTransmission login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
-            return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.ERROR,"not find user").toString());
+            //TODO return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN.getCode(),new Result(ResultEnum.ERROR,"not find user").toString());
         }
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
@@ -46,8 +46,8 @@ public class ChatLoginServiceImpl implements ChatLoginService{
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
         log.info("用户登录成功");
-        return new ChatDataProtocol(data.getId(), ChatDataTypeEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
-
+        //TODO return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN.getCode(),new Result(ResultEnum.SUCCESS).toString());
+        return null;
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {

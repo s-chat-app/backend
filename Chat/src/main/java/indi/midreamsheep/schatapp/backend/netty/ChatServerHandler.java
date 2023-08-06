@@ -4,8 +4,8 @@ import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandle
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.ChatDataTypeEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import indi.midreamsheep.schatapp.backend.util.response.Result;
@@ -35,7 +35,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error", e);
-            ctx.writeAndFlush(new ChatDataProtocol(-1, ChatDataTypeEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "json parse error")).toString());
+            //ctx.writeAndFlush(new ChatTransmission(-1, TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "json parse error")).toString());
             return;
         }
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
@@ -43,7 +43,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message)));
             return;
         }
-        ctx.writeAndFlush(new ChatDataProtocol(message.getId(), ChatDataTypeEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "no handler found")).toString());
+        //ctx.writeAndFlush(new ChatTransmission(message.getId(), TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "no handler found")).toString());
     }
 
     @Override
