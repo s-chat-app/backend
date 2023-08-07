@@ -11,9 +11,9 @@ import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.transmission.SendMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
-import indi.midreamsheep.schatapp.backend.service.chat.individual.send.IndividualChatSendService;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatSendService;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
@@ -35,7 +35,7 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     @ChatAccessChecker(check = TransmissionEnum.SEND_MESSAGE)
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
-        Message message = JsonUtil.getJsonToBean(data.getData(), Message.class);
+        SendMessage message = JsonUtil.getJsonToBean(data.getData(), SendMessage.class);
         SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
         log.info("用户{}发送消息给{}",sChatUser.getId(),message.getMessageTo());
         individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, message));

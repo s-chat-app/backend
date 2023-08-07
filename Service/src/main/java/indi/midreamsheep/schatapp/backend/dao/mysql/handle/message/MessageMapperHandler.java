@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public interface MessageMapperHandler {
     void insertMessage(Message messageEntity);
     void updateMessage(Message messageEntity);
-    void deleteMessage(Message messageEntity);
+    void deleteMessage(long id);
     Message selectMessage(long id);
 }

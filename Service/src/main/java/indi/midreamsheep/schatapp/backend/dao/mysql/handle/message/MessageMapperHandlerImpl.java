@@ -23,8 +23,8 @@ public class MessageMapperHandlerImpl implements MessageMapperHandler{
     }
 
     @Override
-    public void deleteMessage(Message messageEntity) {
-        messageMapper.deleteById(messageEntity);
+    public void deleteMessage(long id) {
+        messageMapper.deleteById(id);
     }
 
     @Override

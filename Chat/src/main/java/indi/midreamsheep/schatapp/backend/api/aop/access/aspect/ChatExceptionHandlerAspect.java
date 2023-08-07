@@ -26,15 +26,15 @@ public class ChatExceptionHandlerAspect {
         }catch (ChatException chatException){
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nChatException: {}",arg.toString(),chatException.getMessage());
-            return ResponseProcessor.makeExceptionResultResponse(arg.getId(),arg.getType(), chatException);
+            return ResponseProcessor.makeResultResponse(arg.getId(),arg.getType(), chatException);
         }catch (JSONException jsonException) {
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nJSONException: {}",arg.toString(),jsonException.getMessage());
-            return ResponseProcessor.makeExceptionResultResponse(arg.getId(), arg.getType(), "error json format");
+            return ResponseProcessor.makeResultResponse(arg.getId(), arg.getType(), "error json format");
         }catch (Throwable throwable){
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nThrowable: {}",arg.toString(),throwable.getMessage());
-            return ResponseProcessor.makeExceptionResultResponse(arg.getId(), arg.getType(), throwable.getMessage());
+            return ResponseProcessor.makeResultResponse(arg.getId(), arg.getType(), throwable.getMessage());
         }
     }
 }
