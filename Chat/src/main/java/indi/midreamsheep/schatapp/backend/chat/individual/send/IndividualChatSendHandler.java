@@ -35,9 +35,10 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     @ChatAccessChecker(check = TransmissionEnum.SEND_MESSAGE)
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
-        Message jsonToBean = JsonUtil.getJsonToBean(data.getData(), Message.class);
+        Message message = JsonUtil.getJsonToBean(data.getData(), Message.class);
         SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
-        individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, jsonToBean));
+        log.info("用户{}发送消息给{}",sChatUser.getId(),message.getMessageTo());
+        individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, message));
         return new ChatTransmission(data.getId(),TransmissionEnum.SEND_MESSAGE,new Result(ResultEnum.SUCCESS));
     }
 }

@@ -7,6 +7,8 @@ import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
+import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
@@ -27,22 +29,23 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
-        System.out.println(msg);
         ChatMessage message;
         try {
             message = JsonUtil.getJsonToBean(msg, ChatMessage.class);
             message.check();
         } catch (Exception e) {
-            log.error("messageReceived error", e);
-            //ctx.writeAndFlush(new ChatTransmission(-1, TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "json parse error")).toString());
+            log.error("messageReceived error:{} \n error msg:{}", e.getMessage(),msg);
+            ctx.writeAndFlush(new ChatTransmission(-1, TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "json parse error")).toString());
             return;
         }
+        log.info("messageReceived:{}", message);
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
         if (chatHandlerInter != null) {
-            ctx.writeAndFlush(JsonUtil.getBeanToJson(chatHandlerInter.handle(ctx, message)));
+            ctx.writeAndFlush((chatHandlerInter.handle(ctx, message).toString()));
             return;
         }
-        //ctx.writeAndFlush(new ChatTransmission(message.getId(), TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "no handler found")).toString());
+        log.info("no handler found for type:{} mapping:{}", message.getType(), message.getMapping());
+        ctx.writeAndFlush(new ChatTransmission(message.getId(), TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "no handler found")).toString());
     }
 
     @Override

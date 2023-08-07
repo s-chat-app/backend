@@ -1,6 +1,5 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
-import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -10,6 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
  * @see ChatServerHandler netty处理器
  * */
 @Component
+@Slf4j
 public class ChatServer {
 
     @Resource
@@ -29,7 +30,7 @@ public class ChatServer {
     public void run(int port) throws InterruptedException {
         userStateManager.addUser(123456,1);
         userStateManager.addUser(1234567,2);
-        System.out.println("服务器启动");
+        log.info("netty服务启动,端口号:{}", port);
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

@@ -25,11 +25,11 @@ public class ChatTransmission {
     private String data;
 
     public ChatTransmission(long id, TransmissionEnum type, ChatTransmissionData data){
-        new ChatTransmission(id, type.getCode(), data.toJson());
+        this(id, type.getCode(), data.toJson());
     }
 
     public ChatTransmission(TransmissionEnum type,ChatTransmissionData data){
-        new ChatTransmission(-1, type.getCode(), data.toJson());
+        this(-1, type.getCode(), data.toJson());
     }
 
     private ChatTransmission(long i, int code, String data) {

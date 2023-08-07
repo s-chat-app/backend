@@ -27,7 +27,7 @@ public class Result implements ChatTransmissionData {
     private String data;
 
     public Result(ResultEnum resultEnum) {
-        new Result(resultEnum,"");
+        this(resultEnum,"");
     }
     public Result(ResultEnum resultEnum, String data) {
         this.code = resultEnum.getCode();

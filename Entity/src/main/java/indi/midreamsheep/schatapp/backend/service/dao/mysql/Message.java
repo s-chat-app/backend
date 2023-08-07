@@ -8,7 +8,6 @@ import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.sql.Timestamp;
 
@@ -22,8 +21,6 @@ public class Message implements ChatTransmissionData {
     private long id;
     @TableField("type")
     private int type;
-    @TableField("message_type")
-    private int messageType;
     @TableField("message")
     private String message;
     @TableField("message_to")

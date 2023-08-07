@@ -46,8 +46,8 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         loginIndividualChat(user, user.getIndividuals());
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
-        log.info("用户登录成功");
-        return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN,new Result(ResultEnum.SUCCESS));
+        log.info("用户"+user.getUserData().getName()+"登录成功");
+        return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN, new Result(ResultEnum.SUCCESS));
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {

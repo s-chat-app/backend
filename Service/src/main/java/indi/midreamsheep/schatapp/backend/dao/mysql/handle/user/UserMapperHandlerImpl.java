@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.dao.mysql.handle.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapper;
@@ -41,8 +42,7 @@ public class UserMapperHandlerImpl implements UserMapperHandler{
             //TODO 处理频道信息
             return user;
         }catch (Exception e){
-            log.error("用户查询失败:{}", e.getMessage());
+            throw new ChatException("the user is not exist");
         }
-        return null;
     }
 }
