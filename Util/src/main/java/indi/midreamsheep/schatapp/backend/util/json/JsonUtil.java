@@ -7,6 +7,11 @@ import com.alibaba.fastjson.TypeReference;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Json工具类
+ * 用于json和对象之间的转换
+ * */
 @SuppressWarnings("unused")
 public class JsonUtil {
     /**
@@ -48,16 +53,14 @@ public class JsonUtil {
      * @return List<Map < String, Object>>
      */
     public static List<Map<String, Object>> getJsonToListMap(String jsonData) {
-        return JSON.parseObject(jsonData, new TypeReference<List<Map<String, Object>>>() {
-        });
+        return JSON.parseObject(jsonData, new TypeReference<>() {});
     }
 
     /**
      * List<T> 转 json 保存到数据库
      */
     public static <T> String listToJson(List<T> ts) {
-        String jsons = JSON.toJSONString(ts);
-        return jsons;
+        return JSON.toJSONString(ts);
     }
 
     /**
@@ -66,7 +69,6 @@ public class JsonUtil {
      *
      * @param object 有数据的目标类
      * @param tClass 转换成的类
-     * @param <T>
      * @return 返回tClass类
      */
     public static <T> T getObjectToClass(Object object, Class<T> tClass) {
@@ -78,9 +80,7 @@ public class JsonUtil {
      * json 转 List<T>
      */
     public static <T> List<T> jsonToList(String jsonString, Class<T> clazz) {
-        @SuppressWarnings("unchecked")
-        List<T> ts = JSONArray.parseArray(jsonString, clazz);
-        return ts;
+        return JSONArray.parseArray(jsonString, clazz);
     }
 
 }

@@ -1,11 +1,14 @@
 package indi.midreamsheep.schatapp.backend.protocol.transmission;
 
-import indi.midreamsheep.schatapp.backend.protocol.data.ChatTransmissionData;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionData;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 用户删除消息数据的接收实体类
+ * */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

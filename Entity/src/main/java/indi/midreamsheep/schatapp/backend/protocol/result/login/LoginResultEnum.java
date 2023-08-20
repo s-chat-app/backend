@@ -1,9 +1,12 @@
-package indi.midreamsheep.schatapp.backend.protocol.data.result.login;
+package indi.midreamsheep.schatapp.backend.protocol.result.login;
 
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultData;
+import indi.midreamsheep.schatapp.backend.protocol.result.ResultData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * 登录结果枚举类
+ * */
 @AllArgsConstructor
 @Getter
 public enum LoginResultEnum implements ResultData {

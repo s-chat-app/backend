@@ -1,0 +1,25 @@
+package indi.midreamsheep.schatapp.backend.service.controller.user.state;
+
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.UserAliveMapperHandler;
+import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Component
+public class UserStateServiceImpl implements UserStateService {
+
+    @Resource
+    private UserAliveMapperHandler userAliveMapperHandler;
+
+    public long getUserId(String privateKey) {
+        return userAliveMapperHandler.getUserId(privateKey);
+    }
+
+    @Override
+    public void addUser(String privateKey, long id) {
+        userAliveMapperHandler.addUser(id,privateKey);
+    }
+}

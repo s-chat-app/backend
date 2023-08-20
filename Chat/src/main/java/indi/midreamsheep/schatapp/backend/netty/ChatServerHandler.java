@@ -4,11 +4,11 @@ import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandle
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error:{} \n error msg:{}", e.getMessage(),msg);
-            ctx.writeAndFlush(new ChatTransmission(-1, TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "json parse error")).toString());
+            ctx.writeAndFlush(new ChatTransmission(-1, ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "json parse error")).toString());
             return;
         }
         log.info("messageReceived:{}", message);
@@ -45,7 +45,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             return;
         }
         log.info("no handler found for type:{} mapping:{}", message.getType(), message.getMapping());
-        ctx.writeAndFlush(new ChatTransmission(message.getId(), TransmissionEnum.HANDLER_EXCEPTION, new Result(ResultEnum.ERROR, "no handler found")).toString());
+        ctx.writeAndFlush(new ChatTransmission(message.getId(), ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "no handler found")).toString());
     }
 
     @Override

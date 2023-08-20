@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrivateKey {
-    private long privateKey;
+    private String privateKey;
 
     @Override
     public String toString() {
@@ -18,7 +18,7 @@ public class PrivateKey {
     }
 
     public void check() {
-        if (privateKey == 0) {
+        if (privateKey.isEmpty()) {
             throw new ChatException("privateKey is null or json string is not correct");
         }
     }

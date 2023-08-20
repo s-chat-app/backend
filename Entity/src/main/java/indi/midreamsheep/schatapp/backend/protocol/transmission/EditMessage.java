@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 用户的编辑消息接收实体类
+ * */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

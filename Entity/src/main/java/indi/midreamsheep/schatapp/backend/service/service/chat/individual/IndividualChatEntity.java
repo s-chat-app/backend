@@ -1,15 +1,18 @@
 package indi.midreamsheep.schatapp.backend.service.service.chat.individual;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import indi.midreamsheep.schatapp.backend.service.service.chat.AbstractChatEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 私人聊天实体类
+ * 内部维护两个用户的数组
+ * */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Slf4j
@@ -21,7 +24,7 @@ public class IndividualChatEntity extends AbstractChatEntity {
          SChatUser user2 = getAnotherUser(user);
          if (user2 != null) {
              log.info("send message to user: {}", user2.getId());
-             user2.receive(TransmissionEnum.SEND_MESSAGE,data,user.getId());
+             user2.receive(ChatTransmissionEnum.SEND_MESSAGE,data,user.getId());
          }
      }
 
@@ -29,7 +32,7 @@ public class IndividualChatEntity extends AbstractChatEntity {
          SChatUser user2 = getAnotherUser(user);
          if (user2 != null) {
              log.info("send message to user: {}", user2.getId());
-             user2.receive(TransmissionEnum.EDIT_MESSAGE,data,user.getId());
+             user2.receive(ChatTransmissionEnum.EDIT_MESSAGE,data,user.getId());
          }
      }
 

@@ -1,6 +1,6 @@
-package indi.midreamsheep.schatapp.backend.protocol.data.result;
+package indi.midreamsheep.schatapp.backend.protocol.result;
 
-import indi.midreamsheep.schatapp.backend.protocol.data.ChatTransmissionData;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionData;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * 用于服务器对用户端数据的回应
+ * 接收{@link ResultData}类
+ * 对于特定的处理逻辑可以自定义枚举类实现{@link ResultData}接口
  * */
 @Data
 @NoArgsConstructor

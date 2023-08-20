@@ -1,10 +1,18 @@
 package indi.midreamsheep.schatapp.backend.api.scan.inter;
 
-import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
 import io.netty.channel.ChannelHandlerContext;
 
+/**
+ * 聊天处理接口
+ * 用于处理聊天消息
+ * */
 public interface ChatHandlerInter {
+    /**
+     * 用于处理聊天消息
+     * @param ctx 通道上下文
+     * @param data 传输的数据
+     * */
     ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data);
 }

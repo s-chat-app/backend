@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Order(5)
-public class AccountCheckerAspect {
+public class ChatAccountCheckerAspect {
 
     @Resource
     private ChannelManager channelManager;
@@ -40,7 +40,7 @@ public class AccountCheckerAspect {
         if (channelManager.getChannelMap().containsKey(ctx.channel())) {
             return pjp.proceed(pjp.getArgs());
         } else {
-            throw new ChatException("not login", ResultEnum.ACCESS_CHECK_FAILED);
+            throw new ChatException("not login", ChatResultEnum.ACCESS_CHECK_FAILED);
         }
     }
 

@@ -3,7 +3,7 @@ package indi.midreamsheep.schatapp.backend.service.dao.mysql;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import indi.midreamsheep.schatapp.backend.protocol.data.ChatTransmissionData;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionData;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;

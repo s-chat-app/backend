@@ -1,11 +1,11 @@
-package indi.midreamsheep.schatapp.backend.protocol;
+package indi.midreamsheep.schatapp.backend.protocol.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum TransmissionEnum {
+public enum ChatTransmissionEnum {
     //账号相关
     LOGIN(1),
     //消息相关，其他用户发的消息的id为-1
@@ -17,8 +17,8 @@ public enum TransmissionEnum {
     ;
     private final int code;
 
-    public static TransmissionEnum fromCode(int code) {
-        for (TransmissionEnum value : TransmissionEnum.values()) {
+    public static ChatTransmissionEnum fromCode(int code) {
+        for (ChatTransmissionEnum value : ChatTransmissionEnum.values()) {
             if (value.code == code) {
                 return value;
             }

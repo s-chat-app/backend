@@ -7,10 +7,10 @@ import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.protocol.transmission.DeleteMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
@@ -32,7 +32,7 @@ public class individualChatDeleteHandler implements ChatHandlerInter {
     private IndividualChatDeleteService individualChatDeleteService;
 
     @Override
-    @ChatAccessChecker(check = TransmissionEnum.DELETE_MESSAGE)
+    @ChatAccessChecker(check = ChatTransmissionEnum.DELETE_MESSAGE)
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
         //获取用户信息
@@ -43,6 +43,6 @@ public class individualChatDeleteHandler implements ChatHandlerInter {
         individualChatDeleteService.check(user, deleteMessage);
         //删除消息
         individualChatDeleteService.delete(user,individualChatDeleteService.endurance(user, deleteMessage));
-        return new ChatTransmission(data.getId(), TransmissionEnum.DELETE_MESSAGE, new Result(ResultEnum.SUCCESS));
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.DELETE_MESSAGE, new Result(ChatResultEnum.SUCCESS));
     }
 }

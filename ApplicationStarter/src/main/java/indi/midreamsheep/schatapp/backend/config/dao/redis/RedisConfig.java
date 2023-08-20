@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * redis配置类
+ * */
 @ConfigurationProperties(prefix = "spring.redis")
 @Data
 @NoArgsConstructor

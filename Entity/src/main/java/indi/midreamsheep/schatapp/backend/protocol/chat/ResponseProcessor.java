@@ -1,9 +1,8 @@
-package indi.midreamsheep.schatapp.backend.protocol;
+package indi.midreamsheep.schatapp.backend.protocol.chat;
 
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.protocol.data.ChatTransmissionData;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import io.netty.channel.Channel;
 
 
@@ -30,7 +29,7 @@ public final class ResponseProcessor {
         ChatTransmission transmission = new ChatTransmission();
         transmission.setId(messageId);
         transmission.setType(type);
-        transmission.setData(new Result(ResultEnum.ERROR,msg).toString());
+        transmission.setData(new Result(ChatResultEnum.ERROR,msg).toString());
         return transmission;
     }
 

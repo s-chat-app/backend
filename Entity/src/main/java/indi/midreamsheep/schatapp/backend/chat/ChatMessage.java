@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 聊天消息类
+ * 用于接收用户发送的消息
+ * */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

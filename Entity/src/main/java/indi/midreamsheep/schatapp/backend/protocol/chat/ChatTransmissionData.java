@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.protocol.data;
+package indi.midreamsheep.schatapp.backend.protocol.chat;
 
 public interface ChatTransmissionData {
 

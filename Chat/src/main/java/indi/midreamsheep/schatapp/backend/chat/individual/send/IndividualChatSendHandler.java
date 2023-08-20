@@ -7,10 +7,10 @@ import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.protocol.transmission.SendMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatSendService;
@@ -32,13 +32,13 @@ public class IndividualChatSendHandler implements ChatHandlerInter {
     private IndividualChatSendService individualChatSendService;
 
     @Override
-    @ChatAccessChecker(check = TransmissionEnum.SEND_MESSAGE)
+    @ChatAccessChecker(check = ChatTransmissionEnum.SEND_MESSAGE)
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
         SendMessage message = JsonUtil.getJsonToBean(data.getData(), SendMessage.class);
         SChatUser sChatUser = channelManager.getChannelMap().get(ctx.channel());
         log.info("用户{}发送消息给{}",sChatUser.getId(),message.getMessageTo());
         individualChatSendService.send(sChatUser, individualChatSendService.endurance(sChatUser, message));
-        return new ChatTransmission(data.getId(),TransmissionEnum.SEND_MESSAGE,new Result(ResultEnum.SUCCESS));
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.SEND_MESSAGE,new Result(ChatResultEnum.SUCCESS));
     }
 }

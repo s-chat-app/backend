@@ -1,15 +1,20 @@
 package indi.midreamsheep.schatapp.backend.service.controller.user.login;
 
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.AccountMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.login.LoginResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.login.LoginResultEnum;
 import indi.midreamsheep.schatapp.backend.service.controller.user.LoginService;
+import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Account;
+import indi.midreamsheep.schatapp.backend.util.entity.IdUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoginServiceImpl implements LoginService {
+
+    @Resource
+    private UserStateService userStateService;
 
     @Resource
     private AccountMapperHandler accountMapperHandler;
@@ -19,8 +24,9 @@ public class LoginServiceImpl implements LoginService {
         Account accountByPwd = accountMapperHandler.getAccountByPwd(userId, password);
         if (accountByPwd != null) {
             //生成token
-            //TODO 生成权限token 插入token表
-            return new Result(LoginResultEnum.SUCCESS,"生成的token").toJson();
+            String privateKey = IdUtil.generatePrivateKey(accountByPwd.getUserId());
+            userStateService.addUser(privateKey, accountByPwd.getUserId());
+            return new Result(LoginResultEnum.SUCCESS,privateKey).toJson();
         }
         return new Result(LoginResultEnum.ERROR,"error password or user is not exist").toJson();
     }
@@ -30,7 +36,9 @@ public class LoginServiceImpl implements LoginService {
         Account accountByToken = accountMapperHandler.getAccountByToken(token);
         if (accountByToken != null) {
             //TODO 生成权限token 插入token表
-            return new Result(LoginResultEnum.SUCCESS,"生成的token").toJson();
+            String privateKey = IdUtil.generatePrivateKey(accountByToken.getUserId());
+            userStateService.addUser(privateKey, accountByToken.getUserId());
+            return new Result(LoginResultEnum.SUCCESS,privateKey).toJson();
         }
         return new Result(LoginResultEnum.ERROR,"error token,please check the input or get a new token from the owner").toJson();
     }

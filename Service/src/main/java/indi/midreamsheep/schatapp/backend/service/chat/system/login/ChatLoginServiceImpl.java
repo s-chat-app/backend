@@ -5,13 +5,13 @@ import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
 import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user.UserMapperHandlerImpl;
-import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
-import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateManagerService;
+import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private IndividualChatManager individualChatManager;
 
     @Resource
-    private UserStateManagerService userStateManager;
+    private UserStateService userStateManager;
 
     @Resource
     private UserMapperHandlerImpl userMapperHandlerImpl;
@@ -47,7 +47,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
         log.info("用户"+user.getUserData().getName()+"登录成功");
-        return new ChatTransmission(data.getId(), TransmissionEnum.LOGIN, new Result(ResultEnum.SUCCESS));
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS));
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {
