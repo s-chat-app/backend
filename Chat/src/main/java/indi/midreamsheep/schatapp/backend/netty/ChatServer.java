@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
-import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
+import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateManagerService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -25,7 +25,7 @@ public class ChatServer {
     private ChatServerHandler chatServerHandler;
 
     @Resource
-    private UserStateManager userStateManager;
+    private UserStateManagerService userStateManager;
 
     public void run(int port) throws InterruptedException {
         userStateManager.addUser(123456,1);

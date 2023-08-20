@@ -26,13 +26,17 @@ public class Result implements ChatTransmissionData {
      * */
     private String data;
 
-    public Result(ResultEnum resultEnum) {
-        this(resultEnum,"");
+    public Result(ResultData resultData) {
+        this(resultData,"");
     }
-    public Result(ResultEnum resultEnum, String data) {
-        this.code = resultEnum.getCode();
-        this.msg = resultEnum.getMsg();
+    public Result(ResultData resultData, String data) {
+        this.code = resultData.getCode();
+        this.msg = resultData.getMsg();
         this.data = data;
+    }
+
+    public Result(ResultData resultData,ResultData data){
+        this(resultData,JsonUtil.getBeanToJson(data));
     }
 
     @Override

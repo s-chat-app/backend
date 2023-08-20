@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.service.chat.individual.api.send;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.message.MessageMapperHandlerImpl;
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.message.MessageMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.protocol.transmission.SendMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatSendService;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;

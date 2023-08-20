@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.dao.mysql.handle.message;
+package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat;
 
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import org.springframework.stereotype.Component;

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum ResultEnum {
+public enum ResultEnum implements ResultData{
     SUCCESS(200, "success"),
     ERROR(500, "error"),
     NOT_FOUND(404, "request processor not found"),
@@ -14,4 +14,6 @@ public enum ResultEnum {
     ;
     private final int code;
     private final String msg;
+
+    
 }

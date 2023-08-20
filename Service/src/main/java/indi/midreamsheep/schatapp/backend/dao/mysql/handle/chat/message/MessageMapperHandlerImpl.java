@@ -1,12 +1,13 @@
-package indi.midreamsheep.schatapp.backend.dao.mysql.handle.message;
+package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.message;
 
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.MessageMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageMapperHandlerImpl implements MessageMapperHandler{
+public class MessageMapperHandlerImpl implements MessageMapperHandler {
 
     @Resource
     private MessageMapper messageMapper;

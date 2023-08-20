@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.dao.mysql.handle.user;
+package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 

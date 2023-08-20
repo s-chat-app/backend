@@ -4,14 +4,14 @@ import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.user.UserMapperHandlerImpl;
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user.UserMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.protocol.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.TransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.data.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.data.result.ResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
-import indi.midreamsheep.schatapp.backend.service.user.UserStateManager;
+import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateManagerService;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private IndividualChatManager individualChatManager;
 
     @Resource
-    private UserStateManager userStateManager;
+    private UserStateManagerService userStateManager;
 
     @Resource
     private UserMapperHandlerImpl userMapperHandlerImpl;

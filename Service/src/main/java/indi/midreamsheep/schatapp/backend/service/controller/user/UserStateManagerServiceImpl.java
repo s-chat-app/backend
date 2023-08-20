@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.service.user;
+package indi.midreamsheep.schatapp.backend.service.controller.user;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class UserStateManagerImpl implements UserStateManager{
+public class UserStateManagerServiceImpl implements UserStateManagerService {
 
     private final Map<Long,Long> userMap = new ConcurrentHashMap<>();
     public long getUserId(long privateKey) {

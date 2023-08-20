@@ -1,8 +1,9 @@
-package indi.midreamsheep.schatapp.backend.dao.mysql.handle.user;
+package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.UserMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.UserMap;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UserMapperHandlerImpl implements UserMapperHandler{
+public class UserMapperHandlerImpl implements UserMapperHandler {
 
     @Resource
     private UserMapper userMapper;
