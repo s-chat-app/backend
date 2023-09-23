@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.message;
 
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.MessageMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import jakarta.annotation.Resource;

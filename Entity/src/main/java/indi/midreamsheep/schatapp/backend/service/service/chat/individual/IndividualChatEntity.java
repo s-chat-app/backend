@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.service.service.chat.individual;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import indi.midreamsheep.schatapp.backend.service.service.chat.AbstractChatEntity;
 import lombok.Data;

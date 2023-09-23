@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.api.aop.access.annotation;
 
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.aspect.ChatAccountCheckerAspect;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 
 import java.lang.annotation.*;
 

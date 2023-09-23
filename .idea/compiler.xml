@@ -7,11 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Chat" />
         <module name="Entity" />
-        <module name="Service" />
         <module name="Control" />
+        <module name="Chat" />
+        <module name="Service" />
         <module name="Util" />
+        <module name="api" />
         <module name="ApplicationStarter" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="Scan" options="-parameters" />
       <module name="Service" options="-parameters" />
       <module name="Util" options="-parameters" />
+      <module name="api" options="-parameters" />
       <module name="controller" options="-parameters" />
       <module name="netty" options="-parameters" />
       <module name="schatapp-backend" options="" />

@@ -2,8 +2,8 @@ package indi.midreamsheep.schatapp.backend.controller.user;
 
 
 import indi.midreamsheep.schatapp.backend.config.SChatConfig;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.login.LoginResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.login.LoginResultEnum;
 import indi.midreamsheep.schatapp.backend.service.controller.user.LoginService;
 import indi.midreamsheep.schatapp.backend.service.service.controller.user.login.LoginTypeEnum;
 import jakarta.annotation.Resource;

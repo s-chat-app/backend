@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.chat;
 
 import indi.midreamsheep.schatapp.backend.api.chat.handler.HandlerMapper;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
-import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import org.springframework.context.ConfigurableApplicationContext;
 

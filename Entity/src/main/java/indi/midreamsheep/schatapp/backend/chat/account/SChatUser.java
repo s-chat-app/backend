@@ -1,8 +1,8 @@
 package indi.midreamsheep.schatapp.backend.chat.account;
 
-import indi.midreamsheep.schatapp.backend.protocol.chat.ResponseProcessor;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionData;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ResponseProcessor;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionData;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,11 +36,11 @@ public class SChatUser {
     private long[] channels;
 
     public void receive(ChatTransmissionEnum type, ChatTransmissionData data, long from){
-        ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data.toJson()));
+        ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data));
         log.info("{} receive message from {}", id, from);
     }
     public void receiveResult(long messageId, ChatTransmissionEnum type, ChatTransmissionData data, long from){
-        ResponseProcessor.write(channel,ResponseProcessor.makeResultResponse(messageId,type.getCode(),data.toJson()));
+        ResponseProcessor.write(channel,ResponseProcessor.makeResultResponse(messageId,type.getCode(),data));
         log.info("{} receive message from {}", id, from);
     }
 }

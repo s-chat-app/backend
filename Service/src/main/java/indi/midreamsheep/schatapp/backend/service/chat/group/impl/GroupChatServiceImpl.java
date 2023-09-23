@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.service.chat.group.impl;
 
 import cn.hutool.core.util.IdUtil;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.GroupMapper;
 import indi.midreamsheep.schatapp.backend.service.chat.group.GroupChatService;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;

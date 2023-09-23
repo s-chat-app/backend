@@ -2,9 +2,9 @@ package indi.midreamsheep.schatapp.backend.service.chat.individual.api.delete;
 
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.MessageMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.transmission.DeleteMessage;
+import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.chat.transmission.DeleteMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
 import jakarta.annotation.Resource;

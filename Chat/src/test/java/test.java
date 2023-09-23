@@ -1,3 +1,6 @@
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
+import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -53,7 +56,11 @@ public class test {
     }
 
     public static void main(String[] args) throws Exception {
-        new test().run();
+        ChatMessage jsonToBean = JsonUtil.getJsonToBean("{\"id\":454,\"type\":1,\"mapping\":\"LOGIN\",\"data\":{\"privateKey\":123456}}", ChatMessage.class);
+        System.out.println(jsonToBean);
+        PrivateKey javaObject = jsonToBean.getData().toJavaObject(PrivateKey.class);
+        System.out.println(javaObject.getPrivateKey());
+        // new test().run();
     }
     /*
     * {"id":454,"type":1,"mapping":"LOGIN","data":{"privateKey":123456}}

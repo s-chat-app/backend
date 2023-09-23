@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.state;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.UserAliveMapperHandler;
+import indi.midreamsheep.schatapp.backend.dao.controller.UserAliveMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserAliveMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.UserAlive;
 import jakarta.annotation.Resource;

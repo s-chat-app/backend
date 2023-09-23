@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.api.chat.handler.annotation;
 
-import indi.midreamsheep.schatapp.backend.chat.message.ChatMapping;
-import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMapping;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

@@ -2,9 +2,9 @@ package indi.midreamsheep.schatapp.backend.service.chat.individual.api.edit;
 
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.MessageMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.transmission.EditMessage;
+import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
+import indi.midreamsheep.schatapp.backend.chat.transmission.EditMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatEditService;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;

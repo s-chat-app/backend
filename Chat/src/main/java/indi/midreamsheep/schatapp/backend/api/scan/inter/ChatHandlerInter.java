@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.api.scan.inter;
 
-import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
 import io.netty.channel.ChannelHandlerContext;
 
 /**

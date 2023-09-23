@@ -1,8 +1,8 @@
 package indi.midreamsheep.schatapp.backend.service.controller.user.login;
 
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.AccountMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.login.LoginResultEnum;
+import indi.midreamsheep.schatapp.backend.dao.controller.AccountMapperHandler;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.login.LoginResultEnum;
 import indi.midreamsheep.schatapp.backend.service.controller.user.LoginService;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.Account;
@@ -26,9 +26,9 @@ public class LoginServiceImpl implements LoginService {
             //生成token
             String privateKey = IdUtil.generatePrivateKey(accountByPwd.getUserId());
             userStateService.addUser(privateKey, accountByPwd.getUserId());
-            return new Result(LoginResultEnum.SUCCESS,privateKey).toJson();
+            return new Result(LoginResultEnum.SUCCESS,privateKey).toString();
         }
-        return new Result(LoginResultEnum.ERROR,"error password or user is not exist").toJson();
+        return new Result(LoginResultEnum.ERROR,"error password or user is not exist").toString();
     }
 
     @Override
@@ -38,9 +38,9 @@ public class LoginServiceImpl implements LoginService {
             //TODO 生成权限token 插入token表
             String privateKey = IdUtil.generatePrivateKey(accountByToken.getUserId());
             userStateService.addUser(privateKey, accountByToken.getUserId());
-            return new Result(LoginResultEnum.SUCCESS,privateKey).toJson();
+            return new Result(LoginResultEnum.SUCCESS,privateKey).toString();
         }
-        return new Result(LoginResultEnum.ERROR,"error token,please check the input or get a new token from the owner").toJson();
+        return new Result(LoginResultEnum.ERROR,"error token,please check the input or get a new token from the owner").toString();
     }
 
     @Override

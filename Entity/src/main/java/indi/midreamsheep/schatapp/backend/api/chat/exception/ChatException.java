@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.api.chat.exception;
 
 
-import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
 import lombok.Getter;
 
 /**

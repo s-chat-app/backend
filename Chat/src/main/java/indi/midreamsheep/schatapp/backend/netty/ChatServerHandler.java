@@ -1,15 +1,16 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
-import indi.midreamsheep.schatapp.backend.chat.ChatMessage;
-import indi.midreamsheep.schatapp.backend.chat.message.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.chat.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.protocol.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.result.chat.ChatResultEnum;
-import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
         ChatMessage message;
         try {
-            message = JsonUtil.getJsonToBean(msg, ChatMessage.class);
+            message = parse(msg);
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error:{} \n error msg:{}", e.getMessage(),msg);
@@ -52,5 +53,20 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         //关闭通道
         ctx.close();
+    }
+    /**
+     * 手动解析chatTransmission
+     *    long id;
+     *    int type;
+     *    String mapping;
+     *    String data;
+     * */
+    private ChatMessage parse(String json){
+        JSONObject jsonObject = JSON.parseObject(json);
+        Long id = jsonObject.getLong("id");
+        Integer type = jsonObject.getInteger("type");
+        String mapping = jsonObject.getString("mapping");
+        JSONObject data = jsonObject.getJSONObject("data");
+        return new ChatMessage(id,type,mapping,data);
     }
 }

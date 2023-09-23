@@ -22,6 +22,7 @@
         <module>Entity</module>
         <module>Util</module>
         <module>Util</module>
+        <module>api</module>
     </modules>
     <properties>
         <java.version>17</java.version>

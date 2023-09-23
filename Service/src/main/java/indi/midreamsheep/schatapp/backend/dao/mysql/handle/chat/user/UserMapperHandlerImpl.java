@@ -3,7 +3,7 @@ package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.UserMapperHandler;
+import indi.midreamsheep.schatapp.backend.dao.chat.UserMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.mysql.UserMap;
