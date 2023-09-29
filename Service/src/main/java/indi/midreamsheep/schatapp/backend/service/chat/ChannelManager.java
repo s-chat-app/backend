@@ -13,18 +13,18 @@ import java.util.Map;
 public class ChannelManager {
 
     //在线用户的对应表
-    private final Map<Channel,SChatUser> channelMap = new HashMap<>();
+    private final Map<Object,SChatUser> channelMap = new HashMap<>();
 
     public void addChannel(SChatUser user) {
         channelMap.put(user.getChannel(), user);
         System.out.println(user.getChannel().hashCode());
     }
 
-    public void removeChannel(Channel channel) {
+    public void removeChannel(Object channel) {
         channelMap.remove(channel);
     }
 
-    public SChatUser getUser(Channel channel) {
+    public SChatUser getUser(Object channel) {
         return channelMap.get(channel);
     }
 }

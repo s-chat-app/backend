@@ -47,7 +47,7 @@ public class ECCUtils {
      */
     public static String decryptByPrivateKey(String encryptedData, String privateKey)
             throws Exception {
-        byte[] decode = Base64.getDecoder().decode(encryptedData);
+        byte[] decode = Base64.getDecoder().decode(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(decode);
         KeyFactory keyFactory = KeyFactory.getInstance("EC");
         Security.addProvider(new BouncyCastleProvider());

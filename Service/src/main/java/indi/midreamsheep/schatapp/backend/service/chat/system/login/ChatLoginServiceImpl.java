@@ -49,13 +49,14 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
         user.setPrivateKey(privateKey.getPrivateKey());
-
         String output = "";
         try {
             KeyPair ec = ECCUtils.initKey(256, "EC");
             EccKey eccKey = new EccKey();
             Base64.Encoder encoder = Base64.getEncoder();
+            eccKey.setPublicKey(privateKey.getPublicKey());
             eccKey.setPrivateKey(encoder.encodeToString(ec.getPrivate().getEncoded()));
+            output = encoder.encodeToString(ec.getPublic().getEncoded());
         } catch (Exception e) {
             throw new ChatException("ecc key init error");
         }
@@ -64,7 +65,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
         log.info("用户"+user.getUserData().getName()+"登录成功");
-        return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS));
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS,output));
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {

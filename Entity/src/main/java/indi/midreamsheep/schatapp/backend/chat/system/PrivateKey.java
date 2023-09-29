@@ -12,13 +12,15 @@ import lombok.NoArgsConstructor;
 public class PrivateKey {
     private String privateKey;
 
+    private String publicKey;
+
     @Override
     public String toString() {
         return JsonUtil.getBeanToJson(this);
     }
 
     public void check() {
-        if (privateKey.isEmpty()) {
+        if (privateKey.isEmpty()||publicKey.isEmpty()) {
             throw new ChatException("privateKey is null or json string is not correct");
         }
     }
