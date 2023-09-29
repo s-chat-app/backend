@@ -1,11 +1,11 @@
 package indi.midreamsheep.schatapp.backend.service.chat.individual.api.send;
 
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.message.MessageMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.chat.transmission.SendMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatSendService;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.dao.Message;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
 import indi.midreamsheep.schatapp.backend.util.entity.IdUtil;
@@ -22,7 +22,7 @@ public class IndividualChatSendServiceImpl implements IndividualChatSendService 
     IndividualChatManager individualChatManager;
 
     @Resource
-    private MessageMapperHandlerImpl messageMapperHandlerImpl;
+    private MessageMapperHandler messageMapperHandlerImpl;
 
     @Override
     public Message endurance(SChatUser user, SendMessage data) {

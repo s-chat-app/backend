@@ -7,7 +7,6 @@ import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.logi
 import indi.midreamsheep.schatapp.backend.service.controller.user.LoginService;
 import indi.midreamsheep.schatapp.backend.service.service.controller.user.login.LoginTypeEnum;
 import jakarta.annotation.Resource;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,9 +23,9 @@ public class LoginController {
 
     @ResponseBody
     @PostMapping("/login/pwd")
-    public String loginByPwd(@Param("user_id") long userId, String password) {
+    public String loginByPwd(long userId, String password) {
         if(sChatConfig.getLoginType()!= LoginTypeEnum.PWD){
-            return notSupportLoginType().toJson();
+            return notSupportLoginType().toString();
         }
         return loginService.loginByPwd(userId, password);
     }
@@ -35,7 +34,7 @@ public class LoginController {
     @PostMapping("/login/token")
     public String loginByToken(String token) {
         if(sChatConfig.getLoginType()!= LoginTypeEnum.TOKEN){
-            return notSupportLoginType().toJson();
+            return notSupportLoginType().toString();
         }
         return loginService.loginByToken(token);
     }
@@ -44,7 +43,7 @@ public class LoginController {
     @PostMapping("/login/server")
     public String loginByServer(String serverToken) {
         if(sChatConfig.getLoginType()!= LoginTypeEnum.SERVER){
-            return notSupportLoginType().toJson();
+            return notSupportLoginType().toString();
         }
         return loginService.loginByServer(serverToken);
     }

@@ -16,6 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.jmx.support.RegistrationPolicy;
 
+import java.security.AllPermission;
+
 /**
  * 整个项目的启动类
  * */
@@ -25,7 +27,6 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @ChatScanConfiguration("indi.midreamsheep.schatapp.backend.chat")
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 /*扫描指定路径下的mapper*/
-@MapperScan("indi.midreamsheep.schatapp.backend.dao.mysql")
 public class ApplicationStarter implements CommandLineRunner {
 
     /**用于启动netty通讯服务*/
@@ -36,8 +37,8 @@ public class ApplicationStarter implements CommandLineRunner {
     @Resource
     private ConfigurableApplicationContext context;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter.class, args);
+    public static void start(Class<?>[] classes,String[] args) {
+        SpringApplication.run(classes, args);
     }
 
 

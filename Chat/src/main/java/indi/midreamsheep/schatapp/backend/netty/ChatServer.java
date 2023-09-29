@@ -37,20 +37,22 @@ public class ChatServer {
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childHandler(new ChannelInitializer<SocketChannel>() { //初始化handler
-                                      @Override
-                                      protected void initChannel(SocketChannel socketChannel) {
-                                          ChannelPipeline pipeline = socketChannel.pipeline();
-                                          //向pipeline加入解码器
-                                          pipeline.addLast("decoder", new StringDecoder());
-                                          //向pipeline加入编码器
-                                          pipeline.addLast("encoder", new StringEncoder());
-                                          pipeline.addLast(chatServerHandler);
-                                      }
-                                  });
+                        @Override
+                        protected void initChannel(SocketChannel socketChannel) {
+                            ChannelPipeline pipeline = socketChannel.pipeline();
+                            //向pipeline加入解码器
+                            pipeline.addLast("decoder", new StringDecoder());
+                            //向pipeline加入编码器
+                            pipeline.addLast("encoder", new StringEncoder());
+                            pipeline.addLast(chatServerHandler);
+                        }
+                    });
             //绑定端口，同步等待成功
             ChannelFuture f = bootstrap.bind(port).sync();
             //等待服务监听端口关闭
             f.channel().closeFuture().sync();
+        }catch (Exception e){
+            e.printStackTrace();
         } finally {
             //退出，释放线程资源
             workerGroup.shutdownGracefully();

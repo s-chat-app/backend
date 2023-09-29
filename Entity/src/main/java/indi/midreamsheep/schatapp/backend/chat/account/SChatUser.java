@@ -3,7 +3,7 @@ package indi.midreamsheep.schatapp.backend.chat.account;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ResponseProcessor;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionData;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.User;
+import indi.midreamsheep.schatapp.backend.service.dao.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Entity" />
         <module name="Control" />
+        <module name="DAO" />
         <module name="Chat" />
         <module name="Service" />
         <module name="Util" />
@@ -29,6 +30,7 @@
       <module name="ApplicationStarter" options="-parameters" />
       <module name="Chat" options="-parameters" />
       <module name="Control" options="-parameters" />
+      <module name="DAO" options="-parameters" />
       <module name="Entity" options="-parameters" />
       <module name="Scan" options="-parameters" />
       <module name="Service" options="-parameters" />

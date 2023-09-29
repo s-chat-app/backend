@@ -7,7 +7,7 @@ import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
 import indi.midreamsheep.schatapp.backend.chat.transmission.EditMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatEditService;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.dao.Message;
 import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

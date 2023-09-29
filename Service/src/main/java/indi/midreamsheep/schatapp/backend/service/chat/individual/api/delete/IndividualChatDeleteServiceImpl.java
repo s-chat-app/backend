@@ -6,7 +6,7 @@ import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.chat.transmission.DeleteMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.dao.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

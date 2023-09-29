@@ -1,10 +1,10 @@
 package indi.midreamsheep.schatapp.backend.service.chat.system.login;
 
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.dao.chat.UserMapperHandler;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
-import indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user.UserMapperHandlerImpl;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
@@ -31,7 +31,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserStateService userStateManager;
 
     @Resource
-    private UserMapperHandlerImpl userMapperHandlerImpl;
+    private UserMapperHandler userMapperHandlerImpl;
 
     @Override
     public ChatTransmission login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {

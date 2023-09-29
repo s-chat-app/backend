@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.dao.chat;
 
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Message;
+import indi.midreamsheep.schatapp.backend.service.dao.Message;
 
 /**
  * 消息相关的数据库操作

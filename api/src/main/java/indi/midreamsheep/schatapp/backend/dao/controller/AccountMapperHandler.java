@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.dao.controller;
 
-import indi.midreamsheep.schatapp.backend.service.dao.mysql.Account;
+import indi.midreamsheep.schatapp.backend.service.dao.Account;
 
 /**
  * 登录注册相关的数据库操作
