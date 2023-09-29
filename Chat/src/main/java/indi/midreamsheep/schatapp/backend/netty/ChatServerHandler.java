@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
+import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageProtocol;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
@@ -26,9 +27,8 @@ import org.springframework.stereotype.Component;
 @Component
 @ChannelHandler.Sharable
 @Slf4j
-public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
+public class ChatServerHandler extends SimpleChannelInboundHandler<MessageProtocol> {
 
-    @Override
     protected void messageReceived(ChannelHandlerContext ctx, String msg) {
         ChatMessage message;
         try {
@@ -54,6 +54,11 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
         //关闭通道
         ctx.close();
     }
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageProtocol s) throws Exception {
+        messageReceived(channelHandlerContext, new String(s.getContent()));
+    }
+
     /**
      * 手动解析chatTransmission
      *    long id;

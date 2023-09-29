@@ -7,7 +7,6 @@ import indi.midreamsheep.schatapp.backend.dao.entity.DaoAccount;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.AccountMapper;
 import indi.midreamsheep.schatapp.backend.service.dao.Account;
 import jakarta.annotation.Resource;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -9,16 +9,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Entity" />
         <module name="Control" />
-        <module name="DAO" />
         <module name="Chat" />
         <module name="Service" />
         <module name="Util" />
         <module name="api" />
         <module name="ApplicationStarter" />
+        <module name="DataBase" />
+        <module name="NettyEncryption" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="controller" target="17" />
+      <module name="DAO" target="17" />
       <module name="netty" target="17" />
       <module name="Scan" target="17" />
       <module name="starter" target="17" />
@@ -31,7 +33,10 @@
       <module name="Chat" options="-parameters" />
       <module name="Control" options="-parameters" />
       <module name="DAO" options="-parameters" />
+      <module name="DataBase" options="-parameters" />
       <module name="Entity" options="-parameters" />
+      <module name="InitSupports" options="" />
+      <module name="NettyEncryption" options="-parameters" />
       <module name="Scan" options="-parameters" />
       <module name="Service" options="-parameters" />
       <module name="Util" options="-parameters" />

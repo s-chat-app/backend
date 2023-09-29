@@ -1,5 +1,7 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
+import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageDecoder;
+import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageEncoder;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -25,7 +27,10 @@ public class ChatServer {
     private ChatServerHandler chatServerHandler;
 
     @Resource
-    private UserStateService userStateManager;
+    private MessageDecoder decoder;
+
+    @Resource
+    private MessageEncoder encoder;
 
     public void run(int port) throws InterruptedException {
         log.info("netty服务启动,端口号:{}", port);
@@ -41,9 +46,9 @@ public class ChatServer {
                         protected void initChannel(SocketChannel socketChannel) {
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             //向pipeline加入解码器
-                            pipeline.addLast("decoder", new StringDecoder());
+                            pipeline.addLast("decoder", decoder);
                             //向pipeline加入编码器
-                            pipeline.addLast("encoder", new StringEncoder());
+                            pipeline.addLast("encoder", encoder);
                             pipeline.addLast(chatServerHandler);
                         }
                     });

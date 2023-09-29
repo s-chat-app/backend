@@ -9,13 +9,20 @@ import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.protocol.ecc.EccKey;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
+import indi.midreamsheep.schatapp.backend.util.entity.IdUtil;
+import indi.midreamsheep.schatapp.backend.util.protocol.ECCUtils;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.security.KeyPair;
+import java.util.Base64;
 
 @Component
 @Slf4j
@@ -42,6 +49,16 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
         user.setChannel(ctx.channel());
         user.setPrivateKey(privateKey.getPrivateKey());
+
+        String output = "";
+        try {
+            KeyPair ec = ECCUtils.initKey(256, "EC");
+            EccKey eccKey = new EccKey();
+            Base64.Encoder encoder = Base64.getEncoder();
+            eccKey.setPrivateKey(encoder.encodeToString(ec.getPrivate().getEncoded()));
+        } catch (Exception e) {
+            throw new ChatException("ecc key init error");
+        }
         channelManager.addChannel(user);
         loginIndividualChat(user, user.getIndividuals());
 /*        loginGroupChat(user, user.getGroups());

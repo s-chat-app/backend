@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.protocol.chat.request.system;
+package indi.midreamsheep.schatapp.backend.chat.system;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;

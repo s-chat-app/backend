@@ -3,6 +3,7 @@ package indi.midreamsheep.schatapp.backend.chat.account;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ResponseProcessor;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionData;
+import indi.midreamsheep.schatapp.backend.protocol.ecc.EccKey;
 import indi.midreamsheep.schatapp.backend.service.dao.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,8 @@ public class SChatUser {
     private long[] groups;
     /**通道列表*/
     private long[] channels;
+    /**加密密钥*/
+    private EccKey eccKey;
 
     public void receive(ChatTransmissionEnum type, ChatTransmissionData data, long from){
         ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data));
