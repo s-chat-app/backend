@@ -25,7 +25,6 @@ public class SystemLoginHandler implements ChatHandlerInter {
     @ChatExceptionHandler
     public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) {
         PrivateKey jsonToBean = data.getData().toJavaObject(PrivateKey.class);
-        System.out.println(jsonToBean.getPrivateKey());
         jsonToBean.check();
         log.info("一个用户尝试登录"+data.getData());
         return chatLoginService.login(ctx, jsonToBean, data);

@@ -14,6 +14,7 @@ import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import indi.midreamsheep.schatapp.backend.util.entity.IdUtil;
+import indi.midreamsheep.schatapp.backend.util.protocol.AesUtil;
 import indi.midreamsheep.schatapp.backend.util.protocol.ECCUtils;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
@@ -51,14 +52,11 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         user.setPrivateKey(privateKey.getPrivateKey());
         String output = "";
         try {
-            KeyPair ec = ECCUtils.initKey(256, "EC");
-            EccKey eccKey = new EccKey();
-            Base64.Encoder encoder = Base64.getEncoder();
-            eccKey.setPublicKey(privateKey.getPublicKey());
-            eccKey.setPrivateKey(encoder.encodeToString(ec.getPrivate().getEncoded()));
-            output = encoder.encodeToString(ec.getPublic().getEncoded());
+            String pk = ECCUtils.encryptByPublicKey(AesUtil.generateKey(), privateKey.getPublicKey());
+            output = "{privateKey:\""+pk+"\"}";
         } catch (Exception e) {
-            throw new ChatException("ecc key init error");
+            log.error("加密失败");
+            return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.ERROR));
         }
         channelManager.addChannel(user);
         loginIndividualChat(user, user.getIndividuals());

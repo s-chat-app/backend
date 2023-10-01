@@ -13,7 +13,7 @@ import java.util.Map;
 public class ChannelManager {
 
     //在线用户的对应表
-    private final Map<Object,SChatUser> channelMap = new HashMap<>();
+    private final Map<Channel,SChatUser> channelMap = new HashMap<>();
 
     public void addChannel(SChatUser user) {
         channelMap.put(user.getChannel(), user);

@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class EccKey {
-    private String publicKey;
     private String privateKey;
 
     @Override

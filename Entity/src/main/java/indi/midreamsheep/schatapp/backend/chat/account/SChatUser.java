@@ -35,8 +35,6 @@ public class SChatUser {
     private long[] groups;
     /**通道列表*/
     private long[] channels;
-    /**加密密钥*/
-    private EccKey eccKey;
 
     public void receive(ChatTransmissionEnum type, ChatTransmissionData data, long from){
         ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data));
