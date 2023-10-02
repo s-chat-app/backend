@@ -20,11 +20,11 @@ public class ChannelManager {
         System.out.println(user.getChannel().hashCode());
     }
 
-    public void removeChannel(Object channel) {
+    public void removeChannel(Channel channel) {
         channelMap.remove(channel);
     }
 
-    public SChatUser getUser(Object channel) {
+    public SChatUser getUser(Channel channel) {
         return channelMap.get(channel);
     }
 }
