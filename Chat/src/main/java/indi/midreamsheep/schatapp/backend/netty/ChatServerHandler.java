@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
-import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageProtocol;
+import indi.midreamsheep.schatapp.backend.protocol.chat.MessageProtocol;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
 import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
@@ -29,24 +29,25 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ChatServerHandler extends SimpleChannelInboundHandler<MessageProtocol> {
 
-    protected void messageReceived(ChannelHandlerContext ctx, String msg) {
+    protected void messageReceived(ChannelHandlerContext ctx, String msg) throws Exception {
+        log.info("messageReceived:{}", msg);
         ChatMessage message;
         try {
             message = parse(msg);
             message.check();
         } catch (Exception e) {
             log.error("messageReceived error:{} \n error msg:{}", e.getMessage(),msg);
-            ctx.writeAndFlush(new ChatTransmission(-1, ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "json parse error")).toString());
+            ctx.writeAndFlush(new MessageProtocol(new ChatTransmission(-1, ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "json parse error"))));
             return;
         }
         log.info("messageReceived:{}", message);
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getMapper(ChatType.valueOf(message.getType())).get(message.getMapping());
         if (chatHandlerInter != null) {
-            ctx.writeAndFlush((chatHandlerInter.handle(ctx, message).toString()));
+            ctx.writeAndFlush((chatHandlerInter.handle(ctx, message)));
             return;
         }
         log.info("no handler found for type:{} mapping:{}", message.getType(), message.getMapping());
-        ctx.writeAndFlush(new ChatTransmission(message.getId(), ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "no handler found")).toString());
+        ctx.writeAndFlush(new MessageProtocol(new ChatTransmission(message.getId(), ChatTransmissionEnum.HANDLER_EXCEPTION, new Result(ChatResultEnum.ERROR, "no handler found"))));
     }
 
     @Override
@@ -55,8 +56,12 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<MessageProtoc
         ctx.close();
     }
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageProtocol s) throws Exception {
-        messageReceived(channelHandlerContext, new String(s.getContent()));
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageProtocol s) {
+        try {
+            messageReceived(channelHandlerContext, new String(s.getContent()));
+        } catch (Exception e) {
+            log.error("channelRead0 error:{}", e.getMessage());
+        }
     }
 
     /**
@@ -69,9 +74,10 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<MessageProtoc
     private ChatMessage parse(String json){
         JSONObject jsonObject = JSON.parseObject(json);
         Long id = jsonObject.getLong("id");
+        System.out.println(id);
         Integer type = jsonObject.getInteger("type");
         String mapping = jsonObject.getString("mapping");
-        JSONObject data = jsonObject.getJSONObject("data");
+        String data = jsonObject.getString("data");
         return new ChatMessage(id,type,mapping,data);
     }
 }

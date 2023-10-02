@@ -72,30 +72,6 @@ public class ECCUtils {
         sign.update(Base64.getDecoder().decode(content));
         return Base64.getEncoder().encodeToString(sign.sign());
     }
- 
-    public static void main(String[] args) {
-        try {
-            for (int i = 0; i < 10; i++) {
-                //初始化获取公钥和私钥
-                KeyPair keypair = initKey(256, "EC");
 
-                PublicKey publicKey = keypair.getPublic();
-                PrivateKey privateKey = keypair.getPrivate();
 
-                String publicKeyBase64 = Base64.getEncoder().encodeToString(publicKey.getEncoded());
-                String privateKeyBase64 = Base64.getEncoder().encodeToString(privateKey.getEncoded());
-                String con = "这是一条测试加密的数据，哈哈哈哈";
-                System.out.println("加密之前：" + con);
-                //加密
-                String content = encryptByPublicKey(con, publicKeyBase64);
-                //解密
-                String contentDe = decryptByPrivateKey(content, privateKeyBase64);
-                //解密之后
-                String deStr = new String(Base64.getDecoder().decode(contentDe));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

@@ -2,6 +2,7 @@ package indi.midreamsheep.schatapp.backend.service.chat.system.login;
 
 import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.dao.chat.UserMapperHandler;
+import indi.midreamsheep.schatapp.backend.protocol.chat.MessageProtocol;
 import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
 import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
@@ -42,7 +43,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandler userMapperHandlerImpl;
 
     @Override
-    public ChatTransmission login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public MessageProtocol login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
             throw new ChatException("the private key is not exist");
@@ -52,18 +53,22 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         user.setPrivateKey(privateKey.getPrivateKey());
         String output = "";
         try {
-            String pk = ECCUtils.encryptByPublicKey(AesUtil.generateKey(), privateKey.getPublicKey());
-            output = "{privateKey:\""+pk+"\"}";
+            String AESKey = AesUtil.generateKey();
+            output = ECCUtils.encryptByPublicKey(AESKey, privateKey.getPublicKey());
+            user.setAESKey(AESKey);
         } catch (Exception e) {
             log.error("加密失败");
-            return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.ERROR));
+            return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.ERROR)));
         }
         channelManager.addChannel(user);
         loginIndividualChat(user, user.getIndividuals());
 /*        loginGroupChat(user, user.getGroups());
         loginChannelChat(user, user.getChannels());*/
-        log.info("用户"+user.getUserData().getName()+"登录成功");
-        return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS,output));
+        log.info("用户"+user.getUserData().getName()+"登录成功"+"id:"+data.getId());
+        System.out.println(privateKey.getPublicKey());
+        System.out.println(output);
+        log.info("AESKey:"+user.getAESKey()+";");
+        return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS,output)));
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {
@@ -79,5 +84,8 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         for (long id : ids) {
             //TODO 处理频道信息
         }
+
     }
+
+
 }

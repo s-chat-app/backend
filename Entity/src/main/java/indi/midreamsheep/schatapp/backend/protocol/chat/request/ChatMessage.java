@@ -34,7 +34,7 @@ public class ChatMessage {
      * 消息的具体数据
      * 用于告诉后端这个消息的具体数据
      * */
-    private JSONObject data;
+    private String data;
 
     public void check() throws Exception{
         if (id <= 0) throw new JSONException("id error");

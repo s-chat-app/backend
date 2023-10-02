@@ -2,6 +2,7 @@ package indi.midreamsheep.schatapp.backend.netty;
 
 import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageDecoder;
 import indi.midreamsheep.schatapp.backend.netty.prototcp.MessageEncoder;
+import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -26,12 +27,6 @@ public class ChatServer {
     @Resource
     private ChatServerHandler chatServerHandler;
 
-    @Resource
-    private MessageDecoder decoder;
-
-    @Resource
-    private MessageEncoder encoder;
-
     public void run(int port) throws InterruptedException {
         log.info("netty服务启动,端口号:{}", port);
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -46,9 +41,9 @@ public class ChatServer {
                         protected void initChannel(SocketChannel socketChannel) {
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             //向pipeline加入解码器
-                            pipeline.addLast("decoder", decoder);
+                            pipeline.addLast("decoder", new MessageDecoder());
                             //向pipeline加入编码器
-                            pipeline.addLast("encoder", encoder);
+                            pipeline.addLast("encoder", new MessageEncoder());
                             pipeline.addLast(chatServerHandler);
                         }
                     });

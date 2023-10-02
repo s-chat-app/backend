@@ -36,6 +36,8 @@ public class SChatUser {
     /**通道列表*/
     private long[] channels;
 
+    private String AESKey;
+
     public void receive(ChatTransmissionEnum type, ChatTransmissionData data, long from){
         ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data));
         log.info("{} receive message from {}", id, from);
