@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.service.chat.individual.manager;
 
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.entity.service.service.chat.individual.IndividualChatEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

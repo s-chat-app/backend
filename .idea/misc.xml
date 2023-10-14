@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
@@ -12,7 +13,9 @@
       <set>
         <option value="$PROJECT_DIR$/DAO/pom.xml" />
         <option value="$PROJECT_DIR$/DataBase/pom.xml" />
+        <option value="$PROJECT_DIR$/Entity/pom.xml" />
         <option value="$PROJECT_DIR$/Scan/pom.xml" />
+        <option value="$PROJECT_DIR$/Util/pom.xml" />
         <option value="$PROJECT_DIR$/controller/pom.xml" />
         <option value="$PROJECT_DIR$/netty/pom.xml" />
         <option value="$PROJECT_DIR$/starter/pom.xml" />

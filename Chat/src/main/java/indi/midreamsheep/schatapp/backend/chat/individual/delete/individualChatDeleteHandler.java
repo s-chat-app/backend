@@ -2,17 +2,15 @@ package indi.midreamsheep.schatapp.backend.chat.individual.delete;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.protocol.chat.MessageProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
-import indi.midreamsheep.schatapp.backend.chat.transmission.DeleteMessage;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.entity.chat.transmission.DeleteMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
@@ -23,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@ChatHandler(type = ChatType.INDIVIDUAL, mapping = "DELETE")
+@ChatHandler("INDIVIDUAL_DELETE")
 public class individualChatDeleteHandler implements ChatHandlerInter {
 
     @Resource
@@ -35,7 +33,7 @@ public class individualChatDeleteHandler implements ChatHandlerInter {
     @Override
     @ChatAccessChecker(check = ChatTransmissionEnum.DELETE_MESSAGE)
     @ChatExceptionHandler
-    public MessageProtocol handle(ChannelHandlerContext ctx, ChatMessage data) throws Exception {
+    public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) throws Exception {
         //获取用户信息
         SChatUser user = channelManager.getUser(ctx.channel());
         //获取消息信息
@@ -44,6 +42,6 @@ public class individualChatDeleteHandler implements ChatHandlerInter {
         individualChatDeleteService.check(user, deleteMessage);
         //删除消息
         individualChatDeleteService.delete(user,individualChatDeleteService.endurance(user, deleteMessage));
-        return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.DELETE_MESSAGE, new Result(ChatResultEnum.SUCCESS)),user.getAESKey());
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.DELETE_MESSAGE, new Result(ChatResultEnum.SUCCESS));
     }
 }

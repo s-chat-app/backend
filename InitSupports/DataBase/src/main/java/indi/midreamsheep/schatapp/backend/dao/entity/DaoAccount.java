@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import indi.midreamsheep.schatapp.backend.service.service.controller.user.login.LoginTypeEnum;
+import indi.midreamsheep.schatapp.backend.entity.service.service.controller.user.login.LoginTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

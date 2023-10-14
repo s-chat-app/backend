@@ -2,17 +2,15 @@ package indi.midreamsheep.schatapp.backend.chat.individual.edit;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
-import indi.midreamsheep.schatapp.backend.protocol.chat.MessageProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
-import indi.midreamsheep.schatapp.backend.chat.transmission.EditMessage;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.entity.chat.transmission.EditMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatEditService;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
@@ -23,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@ChatHandler(type = ChatType.INDIVIDUAL, mapping = "EDIT")
+@ChatHandler( "INDIVIDUAL_EDIT")
 public class IndividualChatEditHandler implements ChatHandlerInter {
 
     @Resource
@@ -35,11 +33,11 @@ public class IndividualChatEditHandler implements ChatHandlerInter {
     @Override
     @ChatAccessChecker(check = ChatTransmissionEnum.EDIT_MESSAGE)
     @ChatExceptionHandler
-    public MessageProtocol handle(ChannelHandlerContext ctx, ChatMessage data) throws Exception {
+    public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) throws Exception {
         SChatUser user = channelManager.getUser(ctx.channel());
         EditMessage editMessage = JsonUtil.getJsonToBean(data.getData(),EditMessage.class);
         individualChatEditService.check(user, editMessage);
         individualChatEditService.edit( user,individualChatEditService.endurance(user, editMessage));
-        return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.EDIT_MESSAGE,new Result(ChatResultEnum.SUCCESS)),user.getAESKey());
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.EDIT_MESSAGE,new Result(ChatResultEnum.SUCCESS),user.getAESKey());
     }
 }

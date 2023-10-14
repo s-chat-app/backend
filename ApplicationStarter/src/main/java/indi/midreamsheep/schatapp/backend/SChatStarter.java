@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * SChat的启动类,通过读取starters/START.schat文件内的内容来对SChat进行配置
+ * */
 public class SChatStarter {
     public static void main(String[] args) throws IOException {
         List<Class<?>> classes = new LinkedList<>();
@@ -14,7 +17,7 @@ public class SChatStarter {
         //读取starters/START.schat文件内的内容
         InputStream inputStream = SChatStarter.class.getClassLoader().getResourceAsStream("starters/START.schat");
         assert inputStream != null:"could not find START.schat file";
-        //通过Hutool工具类读取文件内容
+        //读取文件
         IoUtil.getUtf8Reader(inputStream).lines()
                 .forEach((in)->{
                     try {

@@ -19,8 +19,6 @@
         <module>Control</module>
         <module>Chat</module>
         <module>Service</module>
-        <module>Entity</module>
-        <module>Util</module>
         <module>api</module>
         <module>InitSupports</module>
     </modules>

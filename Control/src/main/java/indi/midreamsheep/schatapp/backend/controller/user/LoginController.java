@@ -1,11 +1,11 @@
 package indi.midreamsheep.schatapp.backend.controller.user;
 
 
-import indi.midreamsheep.schatapp.backend.config.SChatConfig;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.login.LoginResultEnum;
+import indi.midreamsheep.schatapp.backend.entity.config.SChatConfig;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.login.LoginResultEnum;
 import indi.midreamsheep.schatapp.backend.service.controller.user.LoginService;
-import indi.midreamsheep.schatapp.backend.service.service.controller.user.login.LoginTypeEnum;
+import indi.midreamsheep.schatapp.backend.entity.service.service.controller.user.login.LoginTypeEnum;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -2,10 +2,10 @@ package indi.midreamsheep.schatapp.backend.dao.mysql.handle.controller.user.logi
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import indi.midreamsheep.schatapp.backend.dao.controller.AccountMapperHandler;
+import indi.midreamsheep.schatapp.backend.function.dao.controller.AccountMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.entity.DaoAccount;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.AccountMapper;
-import indi.midreamsheep.schatapp.backend.service.dao.Account;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Account;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

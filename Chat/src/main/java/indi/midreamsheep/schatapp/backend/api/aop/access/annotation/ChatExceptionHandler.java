@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.api.aop.access.annotation;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.aspect.ChatExceptionHandlerAspect;
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
 
 import java.lang.annotation.*;
 

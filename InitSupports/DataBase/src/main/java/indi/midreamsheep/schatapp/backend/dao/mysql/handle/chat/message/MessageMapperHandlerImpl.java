@@ -1,10 +1,10 @@
 package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.message;
 
 import cn.hutool.core.bean.BeanUtil;
-import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.entity.DaoMessage;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.MessageMapper;
-import indi.midreamsheep.schatapp.backend.service.dao.Message;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

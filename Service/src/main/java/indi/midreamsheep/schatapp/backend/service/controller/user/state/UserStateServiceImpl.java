@@ -1,6 +1,6 @@
 package indi.midreamsheep.schatapp.backend.service.controller.user.state;
 
-import indi.midreamsheep.schatapp.backend.dao.controller.UserAliveMapperHandler;
+import indi.midreamsheep.schatapp.backend.function.dao.controller.UserAliveMapperHandler;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;

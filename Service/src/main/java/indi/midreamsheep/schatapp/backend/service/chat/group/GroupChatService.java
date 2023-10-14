@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.service.chat.group;
 
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.service.dao.Message;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Message;
 
 /**
  * Group Chat Logics

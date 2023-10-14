@@ -1,1 +1,2 @@
 indi.midreamsheep.schatapp.backend.dao.config.MybatisConfig
+indi.midreamsheep.schatapp.backend.config.SChatNettyConfiguration

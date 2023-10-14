@@ -2,14 +2,13 @@ package indi.midreamsheep.schatapp.backend.dao.mysql.handle.chat.user;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.chat.UserMapperHandler;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.UserMapperHandler;
 import indi.midreamsheep.schatapp.backend.dao.entity.DaoUserMap;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapMapper;
 import indi.midreamsheep.schatapp.backend.dao.mysql.mapper.UserMapper;
-import indi.midreamsheep.schatapp.backend.service.dao.User;
-import indi.midreamsheep.schatapp.backend.service.dao.UserMap;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.User;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

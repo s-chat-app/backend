@@ -1,12 +1,12 @@
 package indi.midreamsheep.schatapp.backend.service.chat.individual.api.delete;
 
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.chat.transmission.DeleteMessage;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.entity.chat.transmission.DeleteMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
-import indi.midreamsheep.schatapp.backend.service.dao.Message;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 

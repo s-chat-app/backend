@@ -2,9 +2,9 @@ package indi.midreamsheep.schatapp.backend.api.aop.access.aspect;
 
 import com.alibaba.fastjson.JSONException;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ResponseProcessor;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ResponseProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -31,15 +31,15 @@ public class ChatExceptionHandlerAspect {
         }catch (ChatException chatException){
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nChatException: {}",arg.toString(),chatException.getMessage());
-            return ResponseProcessor.makeResultResponse(arg.getId(),arg.getType(), chatException);
+            return ResponseProcessor.makeResultResponse(arg.getId(), chatException.getMessage());
         }catch (JSONException jsonException) {
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nJSONException: {}",arg.toString(),jsonException.getMessage());
-            return ResponseProcessor.makeResultResponse(arg.getId(), arg.getType(), "error json format");
+            return ResponseProcessor.makeResultResponse(arg.getId(), "error json format");
         }catch (Throwable throwable){
             ChatMessage arg = (ChatMessage) pjp.getArgs()[1];
             log.error("error msg:{},\nThrowable: {}",arg.toString(),throwable.getMessage());
-            return ResponseProcessor.makeResultResponse(arg.getId(), arg.getType(), throwable.getMessage());
+            return ResponseProcessor.makeResultResponse(arg.getId(), throwable.getMessage());
         }
     }
 }

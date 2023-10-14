@@ -1,10 +1,10 @@
 package indi.midreamsheep.schatapp.backend.service.chat.group.impl;
 
 import cn.hutool.core.util.IdUtil;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.MessageMapperHandler;
 import indi.midreamsheep.schatapp.backend.service.chat.group.GroupChatService;
-import indi.midreamsheep.schatapp.backend.service.dao.Message;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Message;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

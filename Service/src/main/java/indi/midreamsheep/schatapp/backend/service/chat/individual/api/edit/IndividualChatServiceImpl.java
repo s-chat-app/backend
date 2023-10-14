@@ -1,14 +1,13 @@
 package indi.midreamsheep.schatapp.backend.service.chat.individual.api.edit;
 
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.dao.chat.MessageMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatType;
-import indi.midreamsheep.schatapp.backend.chat.transmission.EditMessage;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.MessageMapperHandler;
+import indi.midreamsheep.schatapp.backend.entity.chat.transmission.EditMessage;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatEditService;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
-import indi.midreamsheep.schatapp.backend.service.dao.Message;
-import indi.midreamsheep.schatapp.backend.service.service.chat.individual.IndividualChatEntity;
+import indi.midreamsheep.schatapp.backend.entity.service.dao.Message;
+import indi.midreamsheep.schatapp.backend.entity.service.service.chat.individual.IndividualChatEntity;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -32,7 +31,6 @@ public class IndividualChatServiceImpl implements IndividualChatEditService {
         message.setId(data.getEditId());
         message.setMessageFrom(user.getId());
         message.setMessageTime(now());
-        message.setType(ChatType.INDIVIDUAL.getId());
         message.setMessageTo(data.getMessageTo());
         message.setMessage(data.getMessage());
         messageMapperHandler.updateMessage(message);

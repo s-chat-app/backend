@@ -1,30 +1,23 @@
 package indi.midreamsheep.schatapp.backend.service.chat.system.login;
 
-import indi.midreamsheep.schatapp.backend.api.chat.exception.ChatException;
-import indi.midreamsheep.schatapp.backend.dao.chat.UserMapperHandler;
-import indi.midreamsheep.schatapp.backend.protocol.chat.MessageProtocol;
-import indi.midreamsheep.schatapp.backend.protocol.chat.request.ChatMessage;
-import indi.midreamsheep.schatapp.backend.chat.account.SChatUser;
-import indi.midreamsheep.schatapp.backend.chat.system.PrivateKey;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmission;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.ChatTransmissionEnum;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.Result;
-import indi.midreamsheep.schatapp.backend.protocol.chat.resonse.data.result.chat.ChatResultEnum;
-import indi.midreamsheep.schatapp.backend.protocol.ecc.EccKey;
+import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
+import indi.midreamsheep.schatapp.backend.function.dao.chat.UserMapperHandler;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
+import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.entity.chat.system.PrivateKey;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmission;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
+import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
-import indi.midreamsheep.schatapp.backend.util.entity.IdUtil;
 import indi.midreamsheep.schatapp.backend.util.protocol.AesUtil;
 import indi.midreamsheep.schatapp.backend.util.protocol.ECCUtils;
 import io.netty.channel.ChannelHandlerContext;
 import jakarta.annotation.Resource;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.security.KeyPair;
-import java.util.Base64;
 
 @Component
 @Slf4j
@@ -43,7 +36,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandler userMapperHandlerImpl;
 
     @Override
-    public MessageProtocol login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public ChatTransmission login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
             throw new ChatException("the private key is not exist");
@@ -58,7 +51,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
             user.setAESKey(AESKey);
         } catch (Exception e) {
             log.error("加密失败");
-            return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.ERROR)));
+            return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.ERROR));
         }
         channelManager.addChannel(user);
         loginIndividualChat(user, user.getIndividuals());
@@ -68,7 +61,7 @@ public class ChatLoginServiceImpl implements ChatLoginService{
         System.out.println(privateKey.getPublicKey());
         System.out.println(output);
         log.info("AESKey:"+user.getAESKey()+";");
-        return new MessageProtocol(new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS,output)));
+        return new ChatTransmission(data.getId(), ChatTransmissionEnum.LOGIN, new Result(ChatResultEnum.SUCCESS,output));
     }
     private void loginIndividualChat(SChatUser user, long[] ids) {
         for (long id : ids) {
