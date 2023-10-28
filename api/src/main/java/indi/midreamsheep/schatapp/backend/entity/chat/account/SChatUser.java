@@ -4,6 +4,7 @@ import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ResponseP
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionData;
 import indi.midreamsheep.schatapp.backend.entity.service.dao.User;
+import indi.midreamsheep.schatapp.backend.function.netty.ChatSender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class SChatUser {
     /**用户密钥*/
     private String privateKey;
     /**通道*/
-    private Channel channel;
+    private ChatSender sender;
     /**好友列表*/
     private long[] individuals;
     /**群组列表*/
@@ -38,11 +39,11 @@ public class SChatUser {
     private String AESKey;
 
     public void receive(ChatTransmissionEnum type, ChatTransmissionData data, long from){
-        ResponseProcessor.write(channel,ResponseProcessor.makeResponse(type.getCode(),data));
+        ResponseProcessor.write(sender,ResponseProcessor.makeResponse(type.getCode(),data));
         log.info("{} receive message from {}", id, from);
     }
     public void receiveResult(long messageId, ChatTransmissionEnum type, ChatTransmissionData data, long from){
-        ResponseProcessor.write(channel,ResponseProcessor.makeResultResponse(messageId,type.getCode(),data));
+        ResponseProcessor.write(sender,ResponseProcessor.makeResultResponse(messageId,type.getCode(),data));
         log.info("{} receive message from {}", id, from);
     }
 }

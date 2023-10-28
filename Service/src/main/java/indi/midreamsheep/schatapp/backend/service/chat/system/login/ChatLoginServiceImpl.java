@@ -9,6 +9,7 @@ import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTrans
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmissionEnum;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.function.netty.ChatSender;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.manager.IndividualChatManager;
 import indi.midreamsheep.schatapp.backend.service.controller.user.UserStateService;
@@ -36,13 +37,13 @@ public class ChatLoginServiceImpl implements ChatLoginService{
     private UserMapperHandler userMapperHandlerImpl;
 
     @Override
-    public ChatTransmission login(ChannelHandlerContext ctx, PrivateKey privateKey, ChatMessage data) {
+    public ChatTransmission login(ChatSender sender, PrivateKey privateKey, ChatMessage data) {
         long userId = userStateManager.getUserId(privateKey.getPrivateKey());
         if(userId == -1){
             throw new ChatException("the private key is not exist");
         }
         SChatUser user = userMapperHandlerImpl.getUserById(userId);
-        user.setChannel(ctx.channel());
+        user.setSender(sender);
         user.setPrivateKey(privateKey.getPrivateKey());
         String output = "";
         try {

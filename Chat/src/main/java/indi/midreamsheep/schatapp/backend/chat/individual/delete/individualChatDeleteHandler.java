@@ -2,7 +2,7 @@ package indi.midreamsheep.schatapp.backend.chat.individual.delete;
 
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatAccessChecker;
 import indi.midreamsheep.schatapp.backend.api.aop.access.annotation.ChatExceptionHandler;
-import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.api.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.api.scan.inter.ChatHandlerInter;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
@@ -11,6 +11,7 @@ import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTrans
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
 import indi.midreamsheep.schatapp.backend.entity.chat.transmission.DeleteMessage;
+import indi.midreamsheep.schatapp.backend.function.netty.ChatSender;
 import indi.midreamsheep.schatapp.backend.service.chat.ChannelManager;
 import indi.midreamsheep.schatapp.backend.service.chat.individual.api.IndividualChatDeleteService;
 import indi.midreamsheep.schatapp.backend.util.json.JsonUtil;
@@ -33,9 +34,9 @@ public class individualChatDeleteHandler implements ChatHandlerInter {
     @Override
     @ChatAccessChecker(check = ChatTransmissionEnum.DELETE_MESSAGE)
     @ChatExceptionHandler
-    public ChatTransmission handle(ChannelHandlerContext ctx, ChatMessage data) throws Exception {
+    public ChatTransmission handle(ChatSender sender, ChatMessage data) throws Exception {
         //获取用户信息
-        SChatUser user = channelManager.getUser(ctx.channel());
+        SChatUser user = channelManager.getUser(sender);
         //获取消息信息
         DeleteMessage deleteMessage = JsonUtil.getJsonToBean(data.getData(),DeleteMessage.class);
         //权限校验

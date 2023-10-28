@@ -1,7 +1,7 @@
 package indi.midreamsheep.schatapp.backend.config.scan;
 
-import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.HandlerMapper;
-import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.api.handler.HandlerMapper;
+import indi.midreamsheep.schatapp.backend.api.handler.annotation.ChatHandler;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import lombok.NonNull;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

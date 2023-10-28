@@ -3,6 +3,7 @@ package indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse;
 import indi.midreamsheep.schatapp.backend.entity.api.chat.exception.ChatException;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.Result;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.data.result.chat.ChatResultEnum;
+import indi.midreamsheep.schatapp.backend.function.netty.ChatSender;
 import io.netty.channel.Channel;
 
 
@@ -12,8 +13,8 @@ import io.netty.channel.Channel;
  */
 public final class ResponseProcessor {
 
-    public static void write(Channel channel, ChatTransmission transmission){
-        channel.writeAndFlush(transmission.toString());
+    public static void write(ChatSender sender, ChatTransmission transmission){
+        sender.send(transmission);
     }
 
 

@@ -1,4 +1,4 @@
-package indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation;
+package indi.midreamsheep.schatapp.backend.api.handler.annotation;
 
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMapping;
 

@@ -1,6 +1,6 @@
-package indi.midreamsheep.schatapp.backend.entity.api.chat.handler;
+package indi.midreamsheep.schatapp.backend.api.handler;
 
-import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.api.handler.annotation.ChatHandler;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

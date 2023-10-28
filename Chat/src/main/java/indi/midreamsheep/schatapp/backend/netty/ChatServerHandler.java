@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.netty;
 
-import indi.midreamsheep.schatapp.backend.entity.api.chat.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.api.handler.annotation.ChatHandler;
+import indi.midreamsheep.schatapp.backend.api.send.ChatNettySender;
 import indi.midreamsheep.schatapp.backend.chat.ChatHandlerMapper;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.request.ChatMessage;
 import indi.midreamsheep.schatapp.backend.entity.protocol.chat.resonse.ChatTransmission;
@@ -29,7 +30,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<ChatMessage> 
         log.info("messageReceived:{}", message);
         ChatHandlerInter chatHandlerInter = ChatHandlerMapper.getHandler(message.getMapping());
         if (chatHandlerInter != null) {
-            ctx.writeAndFlush((chatHandlerInter.handle(ctx, message)));
+            ctx.writeAndFlush((chatHandlerInter.handle(new ChatNettySender(ctx.channel()), message)));
             return;
         }
         log.info("no handler found for mapping:{}", message.getMapping());

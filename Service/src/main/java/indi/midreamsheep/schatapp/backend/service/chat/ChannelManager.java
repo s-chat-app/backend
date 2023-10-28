@@ -1,6 +1,7 @@
 package indi.midreamsheep.schatapp.backend.service.chat;
 
 import indi.midreamsheep.schatapp.backend.entity.chat.account.SChatUser;
+import indi.midreamsheep.schatapp.backend.function.netty.ChatSender;
 import io.netty.channel.Channel;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
@@ -13,18 +14,18 @@ import java.util.Map;
 public class ChannelManager {
 
     //在线用户的对应表
-    private final Map<Channel,SChatUser> channelMap = new HashMap<>();
+    private final Map<ChatSender,SChatUser> channelMap = new HashMap<>();
 
     public void addChannel(SChatUser user) {
-        channelMap.put(user.getChannel(), user);
-        System.out.println(user.getChannel().hashCode());
+        channelMap.put(user.getSender(), user);
     }
 
-    public void removeChannel(Channel channel) {
-        channelMap.remove(channel);
+    public void removeChannel(ChatSender sender) {
+        channelMap.remove(sender);
     }
 
-    public SChatUser getUser(Channel channel) {
-        return channelMap.get(channel);
+    public SChatUser getUser(ChatSender sender) {
+        return channelMap.get(sender
+        );
     }
 }
